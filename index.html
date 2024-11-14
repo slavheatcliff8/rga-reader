@@ -947,7 +947,7 @@
         </div>
         <div class="controls">
             <label><b>Quelle:</b></label> 
-            <button class="choise-of-the-quelle" data-tab="3" data-tab-number = "3">Karabo</button>
+            <button class="choise-of-the-quelle" data-tab="3" data-tab-number = "3"  value = "Karabo">Karabo</button>
 
             <label><b>Used measurements</b> From:              
                 <input type="number" id="startInterval3" value="1" min="1">
@@ -975,7 +975,7 @@
         </div>
         <div class="controls">
             <label><b>Quelle:</b></label> 
-            <button class="choise-of-the-quelle" data-tab="4" data-tab-number = "4">Karabo</button>
+            <button class="choise-of-the-quelle" data-tab="4" data-tab-number = "4"  value = "Karabo">Karabo</button>
 
             <label><b>Used measurements</b> From:              
                 <input type="number" id="startInterval4" value="1" min="1">
@@ -1920,9 +1920,8 @@
                         }
                     }
                 });
-                console.log('process file1 clean 0');
+                
             }
-            console.log (data[0][5])
             displayData(dataTableId, data, tabNumber, filestatus);
             updateSummaryTable(summaryTableId, data, tabNumber);
             updateAverages(dataTableId, data, tabNumber);
@@ -1932,7 +1931,6 @@
     }
 
     function displayData(tableId, data, tabNumber,filestatus) {
-        console.log ('display data')
         let startInterval = 0;
         let endInterval = 100;
         if (!Array.isArray(filestatus)) {
