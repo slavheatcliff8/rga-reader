@@ -2266,6 +2266,8 @@
                             color_1 = document.getElementById("colorPicker_sample_bar").value || 'rgba(255, 99, 132, 0.3)';
                             stackGroupX = 'StackGroupX2';
                             op = document.getElementById("opacityInput_reference_bar").value/100;
+                        }else if (ds.label === 'Comparison') {
+                            color_1 = document.getElementById("colorPicker_comparison_bar").value || 'rgba(255, 99, 132, 0.3)';
                         } else if (ds.label === 'Reference measurment line') {
                             color_1 = "white";
 
