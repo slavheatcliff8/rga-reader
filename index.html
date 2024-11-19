@@ -2601,7 +2601,7 @@
                 let added = false;  // Флаг для отслеживания добавления новых данных
                 let info_peaks = []
                 Object.keys(datasets).forEach((label) => {
-                    if (!label.includes("Calculated") && !label.includes("Comparison") && !label.includes("line")) {
+                    if (!label.includes("Calculated") && !label.includes("Comparison") && !label.includes("line") &&  !label.includes("Vacuum test")) {
                         const oldData = datasets[label].data;
                         let oldGreyData = datasets[`Calculated ${label}`]?.data || Array(100).fill(0);
                         const oldGreyPeaks = datasets[`Calculated ${label}`]?.peaks|| [];
