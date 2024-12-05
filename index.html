@@ -11,29 +11,58 @@
     <style>
         body {
                 font-family: Arial, sans-serif;
-                overflow: hidden; 
-                position: fixed; 
-                width: 100%; 
-                height: 100%; 
+                overflow: hidden; /* Отключает прокрутку страницы */
+                position: fixed; /* Фиксирует страницу на месте */
+                width: 100%; /* Устанавливает ширину на 100% экрана */
+                height: 100%; /* Устанавливает высоту на 100% экрана */
         }
 
         #bar-line {
             display: flex;
-            justify-content: space-between; 
+            justify-content: space-between; /* Равномерное распределение левой и правой частей */
             margin-bottom: 20px;
-            height: 150px;
+            height: auto;
         }
 
         .left-buttons {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            height: 50px;
+            flex-direction: column; /* Две группы кнопок в две строки */
+            gap: 3px; /* Отступ между строками кнопок */
+            height: auto;
+            border: 1px solid #241616;
+            border-radius: 5px;
+            padding: 4px;
         }
 
+        
+        .last100 {
+                cursor: pointer;
+                padding: 5px;
+                margin-right: 5px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: #f1f1f1;
+                font-family: Helvetica, Helvetica;
+                font-size: 12px;
+                height: 30px;
+                width: 150px;
+        }
+
+        .last100:active {
+            transform: scale(0.95); 
+            background-color: #d1d1d1; 
+        }
+
+        .button-group_main {
+            display: flex;
+            gap: 1px; /* Пространство между кнопками в строке */
+            border: 1px solid #241616;
+            border-radius: 5px;
+        }
         .button-group {
             display: flex;
-            gap: 10px; 
+            gap: 1px; /* Пространство между кнопками в строке */
+
         }
 
         .center-controls {
@@ -41,7 +70,7 @@
             height: 55px;
             width: 100%;
             margin-top: 30px;
-            gap: 5px; 
+            gap: 5px; /* Отступы между элементами */
         }
 
         .center-controls label {
@@ -58,7 +87,7 @@
         }
 
         #menu-1 {
-            width: 50%; 
+            width: 50%; /* Ширина меню */
             height: 120px;
         }
 
@@ -74,19 +103,19 @@
 
         .image-container h2 {
                 display: flex;
-                align-items: center; 
-                margin: 0; 
+                align-items: center; /* Вертикальное выравнивание по центру */
+                margin: 0; /* Убирает стандартные отступы заголовка */
         }
 
         .image-container img {
-                height: 70px; 
-                margin-right: 10px; 
-                vertical-align: middle; 
+                height: 70px; /* Устанавливаем высоту изображения */
+                margin-right: 10px; /* Отступ между изображением и текстом */
+                vertical-align: middle; /* Вертикальное выравнивание изображения по центру строки */
         }
 
         .image-container h2 span {
                 display: inline-flex;
-                align-items: center; 
+                align-items: center; /* Вертикальное выравнивание текста */
         }
 
         .tab-button {
@@ -112,6 +141,18 @@
                 height: 50px;
                 width: 150px;
         }
+        .button-add-grey_visualisation {
+                cursor: pointer;
+                padding: 0px;
+                margin-right: 0px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: #f1f1f1;
+                font-family: Helvetica, Helvetica;
+                font-size: 16px;
+                height: 50px;
+                width: 66px;
+        }
         .sendToComparison {
                 cursor: pointer;
                 padding: 5px;
@@ -125,59 +166,38 @@
                 width: 150px;
         }
         .sendToComparison:active {
-            transform: scale(0.95); 
-            background-color: #d1d1d1; 
-        }
-
-        .last100 {
-                cursor: pointer;
-                padding: 5px;
-                margin-right: 5px;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-                background-color: #f1f1f1;
-                font-family: Helvetica, Helvetica;
-                font-size: 12px;
-                height: 30px;
-                width: 150px;
-        }
-        .last100:active {
-            transform: scale(0.95); 
-            background-color: #d1d1d1; 
+            transform: scale(0.95); /* Уменьшение кнопки при нажатии */
+            background-color: #d1d1d1; /* Изменение цвета фона при нажатии */
         }
 
         .button-add-reference {
                 cursor: pointer;
-                padding: 10px;
-                margin-right: 5px;
+
+
                 border: 1px solid #0000006b;
                 border-radius: 5px;
                 background-color: #4bc0c033!important;
                 font-family: Helvetica, Helvetica;
-                font-size: 12px;
+                font-size: 15px;
         }
 
         .button-add-data {
                 cursor: pointer;
-                padding: 10px;
-                margin-right: 5px;
                 border: 1px solid #ddd;
                 border-radius: 5px;
                 background-color: #ff638433!important;
                 font-family: Helvetica, Helvetica;
-                font-size: 12px;
+                font-size: 15px;
         }
         
         
         .button-add-comparison {
                 cursor: pointer;
-                padding: 10px;
-                margin-right: 5px;
                 border: 1px solid #ddd;
                 border-radius: 5px;
                 background-color: #473737b0 !important;
                 font-family: Helvetica, Helvetica;
-                font-size: 12px;
+                font-size: 15px;
                 color:"white";
         }
 
@@ -186,33 +206,34 @@
         }
 
         .table-container {
-                display: flex; 
+                display: flex; /* Flexbox для размещения таблиц в ряд */
                 justify-content: flex-start;
                 width: 95%;
                 border: 0px solid #ddd;
                 max-height: 600px; 
                 margin: 20px auto;
                 padding: 10px;
-                overflow-x: auto; 
-                overflow-y: auto!important; 
+                overflow-x: auto; /* Добавляет горизонтальную прокрутку */
+                overflow-y: auto!important; /* Добавляет вертикальную прокрутку */
         }
         #menu-2 {
-                display: flex; 
+                display: flex; /* Flexbox для размещения таблиц в ряд */
                 justify-content: flex-start;
                 width: 95%;
                 height: 500px;
-                overflow: auto; 
+                overflow: auto; /* Добавляет прокрутку */
                 border: 0px solid #ddd;
                 margin: 20px auto;
+                margin-top: 50px;
                 padding: 10px;
         }
 
         .table-container-comp {
-                display: flex; 
+                display: flex; /* Flexbox для размещения таблиц в ряд */
                 justify-content: flex-start;
                 width: 95%;
                 height: 100px;
-                overflow: auto;
+                overflow: auto; /* Добавляет прокрутку */
                 border: 0px solid #ddd;
                 margin: 20px auto;
                 padding: 10px;
@@ -220,25 +241,25 @@
 
         .table-container table {
                 border-collapse: collapse;
-                margin-right: 20px;
+                margin-right: 20px; /* Отступ между таблицами */
         }
 
         .table-container-comp table {
                 border-collapse: collapse;
-                margin-right: 20px; 
+                margin-right: 20px; /* Отступ между таблицами */
         }
 
         .table-container table:last-of-type {
-                margin-right: 0; 
+                margin-right: 0; /* Убираем отступ у последней таблицы */
         }
 
         .table-container-comp table:last-of-type {
-                margin-right: 0; 
+                margin-right: 0; /* Убираем отступ у последней таблицы */
         }
 
         table, th, td {
-                width: 150px; 
-                height: 40px;
+                width: 150px; /* Фиксированная ширина ячеек */
+                height: 40px; /* Фиксированная высота ячеек */
                 border: 1px solid;
                 text-align: center;
                 padding: 0;
@@ -283,15 +304,15 @@
         }
 
         .gray-row {
-                background-color: #a7dfe6; 
-                height: 40px; 
+                background-color: #a7dfe6; /* Серый цвет */
+                height: 40px; /* Высота строки */
         }
 
         thead th {
                 position: sticky;
                 top: 0;
-                background-color: #f7caca; 
-                z-index: 1; 
+                background-color: #f7caca; /* Цвет фона для заголовка, чтобы он выделялся */
+                z-index: 1; /* Чтобы заголовок был поверх других элементов при прокрутке */
         }
         .сont{
             border: 1px solid black;
@@ -301,21 +322,21 @@
         }
         #chartContainer {
             position: relative;
-            width: 60%; 
-            height: 460px; 
+            width: 60%; /* Ширина контейнера на всю ширину родителя */
+            height: 460px; /* Начальная высота контейнера */
             margin-top: 20px;
             margin-left: 5px;
-            font-family: 'Helvetica', sans-serif;
-            border: 1px solid #ddd; 
-            overflow: hidden; 
-            resize: both; 
-            box-sizing: border-box; 
+            font-family: 'Helvetica', sans-serif; /* Используем шрифт Helvetica */
+            border: 1px solid #ddd; /* Линия вокруг контейнера для визуализации */
+            overflow: hidden; /* Скрытие содержимого, выходящего за пределы контейнера */
+            resize: both; /* Разрешение растягивания контейнера */
+            box-sizing: border-box; /* Учитывать границы и отступы при расчете размеров */
         }
         
         canvas {
             display: block;
-            width: 100% !important;  
-            height: 100% !important;
+            width: 100% !important;  /* Ширина холста в процентах от контейнера */
+            height: 100% !important; /* Высота холста в процентах от контейнера */
         }
         .chart-title {
             text-align: center;
@@ -332,38 +353,38 @@
             cursor: se-resize;
         }
         .square-button-active {
-            width: auto;
+            width: auto; /* Ширина кнопки */
             min-width: 1.5cm;
-            height: 1.5cm; 
-            background-color: #60656674;
-            color: white;
-            border: none; 
-            border-radius: 5px; 
-            font-size: 19px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            display: flex; 
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            text-transform: none; 
-            display: inline-block; 
-            margin-right: 10px;
+            height: 1.5cm; /* Высота кнопки */
+            background-color: #60656674; /* Голубой цвет */
+            color: white; /* Цвет текста */
+            border: none; /* Убираем бордер */
+            border-radius: 5px; /* Скругляем углы (по желанию) */
+            font-size: 19px; /* Размер шрифта */
+            font-weight: bold; /* Жирный шрифт */
+            cursor: pointer; /* Курсор при наведении */
+            display: flex; /* Используем flexbox для центрирования текста */
+            align-items: center; /* Вертикальное центрирование текста */
+            justify-content: center; /* Горизонтальное центрирование текста */
+            text-align: center; /* Выравнивание текста по центру */
+            text-transform: none; /* Преобразуем текст в верхний регистр, если необходимо */
+            display: inline-block; /* Размещаем кнопки в одну строку */
+            margin-right: 10px; /* Расстояние между кнопками */
         }
 
         input[type="number"] {
-            width: 50px; 
+            width: 50px; /* Устанавливаем ширину для всех полей с типом number */
             height: 20px; 
-            text-align: center;
-            justify-content: center; 
+            text-align: center; /* Выравнивание текста по центру */
+            justify-content: center; /* Горизонтальное центрирование текста */
         }
         .pdf-table-container {
-            display: flex; 
-            flex-direction: column; 
+            display: flex; /* Для расположения контейнеров по горизонтали */
+            flex-direction: column; /* Размещаем контейнеры вертикально */
             justify-content: flex-start;
             width: 230mm;
             height: 700px;
-            overflow: auto;
+            overflow: auto; /* Добавляет прокрутку */
             border: 0px solid #ddd;
             padding: 10px;
         }
@@ -376,98 +397,98 @@
         }
 
         .pdf-container {
-            width: 210mm; 
+            width: 210mm; /* Ширина A4 */
             height: 297mm;
             background-color: #fff;
             border: 1px solid rgba(0, 0, 0, 0.1);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Устанавливаем вертикальное направление */
             padding: 20px;
-            box-sizing: border-box; 
-            margin-bottom: 20px; 
+            box-sizing: border-box; /* Учитывает padding в размерах */
+            margin-bottom: 20px; /* Отступ между контейнерами */
         }
 
         .pdf-logo {
-            width: 29.6mm;
-            height: 29.6mm; 
+            width: 29.6mm; /* Ширина A4 */
+            height: 29.6mm; /* Высота A4 */
         }
 
         .pdf-logo-cont {
-            height: auto; 
-            align-items: center; 
-            margin-bottom: 3px; 
+            height: auto; /* Автоматическая высота */
+            align-items: center; /* Центрирование по вертикали */
+            margin-bottom: 3px; /* Отступ снизу для логотипа */
         }
         .pdf-text-header-big {
-            justify-content: center; 
-            text-align: center; 
-            width: 100%; 
-            height: 145px; 
+            justify-content: center; /* Горизонтальное выравнивание по центру */
+            text-align: center; /* Вертикальное выравнивание по центру */
+            width: 100%; /* Ширина 100% контейнера */
+            height: 145px; /* Фиксированная высота */
             border: 2px solid rgba(15, 23, 72, 1);
             font-size: 28px;
             font-weight: bold;
             font-family: 'Arial', rgba(15, 23, 72, 1);;
-            padding-top: 41px; 
-            box-sizing: border-box;
+            padding-top: 41px; /* Убираем отступы, чтобы текст был по центру */
+            box-sizing: border-box; /* Учитываем границы в размерах */
             margin-left: 5px;
         }
         .pdf-text-name {
-            width: 140px; 
-            height: 30px; 
+            width: 140px; /* Ширина 100% контейнера */
+            height: 30px; /* Фиксированная высота */
             border: 0px solid rgba(15, 23, 72, 1);
             font-size: 15px;
             font-family: 'Arial', rgba(15, 23, 72, 1);;
-            box-sizing: border-box;
+            box-sizing: border-box; /* Учитываем границы в размерах */
 
         }
         .pdf-text-info {
-            display: flex;
-            justify-content: center; 
-            align-items: center; 
-            width: 100%; 
-            height: 35px; 
+            display: flex; /* Включаем Flexbox */
+            justify-content: center; /* Горизонтальное выравнивание по центру */
+            align-items: center; /* Вертикальное выравнивание по центру */
+            width: 100%; /* Ширина 100% контейнера */
+            height: 35px; /* Фиксированная высота */
             border: 2px solid rgba(15, 23, 72, 1);
             font-size: 18px;
             font-family: 'Arial', rgb(0, 0, 0);
-            box-sizing: border-box; 
+            box-sizing: border-box; /* Учитываем границы в размерах */
             margin-left: 0px;
             padding: 0px;
         }
         .pdf-text-yes-no {
-            width: 250px; 
-            height: 30px; 
+            width: 250px; /* Ширина 100% контейнера */
+            height: 30px; /* Фиксированная высота */
             border: 0px solid rgba(15, 23, 72, 1);
             font-size: 15px;
             font-family: 'Arial', rgba(15, 23, 72, 1);;
-            box-sizing: border-box; 
+            box-sizing: border-box; /* Учитываем границы в размерах */
         }
 
 
         .pdf-text-header-small {
-            text-align: center; 
+            text-align: center; /* Центрируем текст */
             font-size: 20px;
             font-weight: bold;
             font-family: 'Arial', rgba(15, 23, 72, 1);
-            padding: 10px 0; 
+            padding: 10px 0; /* Отступ сверху и снизу */
         }
 
         .pdf-text-logo {
-            text-align: center;
+            text-align: center; /* Центрируем текст */
             font-size: 13px;
             font-weight: bold;
             font-family: 'Arial', rgba(15, 23, 72, 1);;
-            margin-top: 3px;
+            margin-top: 3px; /* Отступ сверху для текста логотипа */
         }
 
         .pdf-header {
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
+            display: flex; /* Flexbox для выравнивания логотипа и текста */
+            justify-content: space-between; /* Распределение пространства между элементами */
+            align-items: center; /* Центрирование по вертикали */
         }
         .pdf-info {
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
+            display: flex; /* Flexbox для выравнивания логотипа и текста */
+            justify-content: space-between; /* Распределение пространства между элементами */
+            align-items: center; /* Центрирование по вертикали */
             margin-top: 15px;
         }
         
@@ -484,42 +505,42 @@
         .pdf-text-handover-date {
             font-size: 18px;
             align-items: left; 
-            width: 210px; 
+            width: 210px; /* Ширина 100% контейнера */
             font-family: 'Arial', rgba(15, 23, 72, 1);
             font-weight: bold;
             margin-left: 150px;
             
         }
         .pdf-text-sample-data {
-            display: flex; 
-            justify-content: center;
-            align-items: center;
-            width: 40.6mm;
-            height: 30px; 
+            display: flex; /* Включаем Flexbox */
+            justify-content: center; /* Горизонтальное выравнивание по центру */
+            align-items: center; /* Вертикальное выравнивание по центру */
+            width: 40.6mm; /* Ширина 100% контейнера */
+            height: 30px; /* Фиксированная высота */
             border: 2px solid rgba(15, 23, 72, 1);
             font-size: 18px;
             font-family: 'Arial', rgb(0, 0, 0);
-            box-sizing: border-box; 
+            box-sizing: border-box; /* Учитываем границы в размерах */
             margin-left: 0px;
         }
         .pdf-text-sample-box {
-            display: flex;
-            width: 100%; 
-            height: 25px;
+            display: flex; /* Включаем Flexbox */
+            width: 100%; /* Ширина 100% контейнера */
+            height: 25px; /* Фиксированная высота */
             border: 0px solid rgba(15, 23, 72, 1);
             font-size: 18px;
             font-family: 'Arial', rgb(0, 0, 0);
-            box-sizing: border-box;
+            box-sizing: border-box; /* Учитываем границы в размерах */
             padding: 0px;
         }
         .pdf-text-measurement-details-box {
-            display: flex; 
-            width: 100%; 
-            height: 30px; 
+            display: flex; /* Включаем Flexbox */
+            width: 100%; /* Ширина 100% контейнера */
+            height: 30px; /* Фиксированная высота */
             border: 0px solid rgba(15, 23, 72, 1);
             font-size: 22px;
             font-family: 'Arial', rgb(0, 0, 0);
-            box-sizing: border-box; 
+            box-sizing: border-box; /* Учитываем границы в размерах */
             padding: 0px;
         }
 
@@ -558,38 +579,38 @@
             margin-right: 10px;
         }
         .pdf-text-checkbox {
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            width: 380px;
-            height: 35px;
+            display: flex; /* Включаем Flexbox */
+            justify-content: center; /* Горизонтальное выравнивание по центру */
+            align-items: center; /* Вертикальное выравнивание по центру */
+            width: 380px; /* Ширина 100% контейнера */
+            height: 35px; /* Фиксированная высота */
             border: 2px solid rgba(15, 23, 72, 1);
             font-size: 18px;
             font-family: 'Arial', rgb(0, 0, 0);
-            box-sizing: border-box; 
+            box-sizing: border-box; /* Учитываем границы в размерах */
             margin-left: 40px;
             padding: 0px;
         } 
         .pdf-text-final-pressure {
-            width: 220px; 
-            height: 35px; 
+            width: 220px; /* Ширина 100% контейнера */
+            height: 35px; /* Фиксированная высота */
             border: 2px solid rgba(15, 23, 72, 1);
             font-size: 18px;
             font-family: 'Arial', rgb(0, 0, 0);
-            box-sizing: border-box; 
+            box-sizing: border-box; /* Учитываем границы в размерах */
             margin-right: 410px;
             padding: 0px;
         } 
         .pdf-text-final-remarks {
         
-            justify-content: center; 
-            align-items: center; 
-            width: 100%;
-            height: 120px;
+            justify-content: center; /* Горизонтальное выравнивание по центру */
+            align-items: center; /* Вертикальное выравнивание по центру */
+            width: 100%; /* Ширина 100% контейнера */
+            height: 120px; /* Фиксированная высота */
             border: 2px solid rgba(15, 23, 72, 1);
             font-size: 16px;
             font-family: 'Arial', rgb(0, 0, 0);
-            box-sizing: border-box; 
+            box-sizing: border-box; /* Учитываем границы в размерах */
             margin-left: 0px;
             padding: 0px;
         } 
@@ -632,119 +653,120 @@
         }
 
         .pdf-plot {
-            display: flex; 
-            justify-content: center; 
-            width: 100%; 
-            height: 90mm; 
+            display: flex; /* Включаем Flexbox */
+            justify-content: center; /* Горизонтальное выравнивание по центру */
+            width: 100%; /* Ширина 100% контейнера */
+            height: 90mm; /* Фиксированная высота */
             border: 0px solid rgba(15, 23, 72, 1);
             font-size: 18px;
             font-family: 'Arial', rgb(0, 0, 0);
-            box-sizing: border-box;
+            box-sizing: border-box; /* Учитываем границы в размерах */
             margin-left: 0px;
             padding: 0px;
         }
         .pdf-text-sample-plot {
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            width: 100.6mm; 
-            height: 30px; 
+            display: flex; /* Включаем Flexbox */
+            justify-content: center; /* Горизонтальное выравнивание по центру */
+            align-items: center; /* Вертикальное выравнивание по центру */
+            width: 100.6mm; /* Ширина 100% контейнера */
+            height: 30px; /* Фиксированная высота */
             border: 3px solid rgba(15, 23, 72, 1);
             font-size: 18px;
             font-family: 'Arial', rgb(0, 0, 0);
-            box-sizing: border-box; 
+            box-sizing: border-box; /* Учитываем границы в размерах */
             margin-left: 50px;
         }
         .pdf-2-name-pressure{
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-            width: 53.6mm;
-            height: 30px; 
+            display: flex; /* Включаем Flexbox */
+            justify-content: center; /* Горизонтальное выравнивание по центру */
+            align-items: center; /* Вертикальное выравнивание по центру */
+            width: 53.6mm; /* Ширина 100% контейнера */
+            height: 30px; /* Фиксированная высота */
             border: 2px solid rgba(15, 23, 72, 1);
             font-size: 18px;
             font-family: 'Arial', rgb(0, 0, 0);
-            box-sizing: border-box; 
+            box-sizing: border-box; /* Учитываем границы в размерах */
             margin-left: 10px;
             
         }
         .pdf-2-name-data{
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            width: 53.6mm; 
-            height: 30px; 
+            display: flex; /* Включаем Flexbox */
+            justify-content: center; /* Горизонтальное выравнивание по центру */
+            align-items: center; /* Вертикальное выравнивание по центру */
+            width: 53.6mm; /* Ширина 100% контейнера */
+            height: 30px; /* Фиксированная высота */
             border: 2px solid rgba(15, 23, 72, 1);
             font-size: 18px;
             font-family: 'Arial', rgb(0, 0, 0);
-            box-sizing: border-box; 
+            box-sizing: border-box; /* Учитываем границы в размерах */
             margin-right: 50px;
             margin-left: 10px;
             
         }
         .pdf-2-text-pressure {
-            height: 30px; 
+            height: 30px; /* Фиксированная высота */
             border: 0px solid rgba(15, 23, 72, 1);
             font-size: 15px;
             font-family: 'Arial', rgba(15, 23, 72, 1);;
-            box-sizing: border-box; 
+            box-sizing: border-box; /* Учитываем границы в размерах */
         }
         .pdf-2-text-data {
-            height: 30px; 
+            height: 30px; /* Фиксированная высота */
             border: 0px solid rgba(15, 23, 72, 1);
             font-size: 15px;
             font-family: 'Arial', rgba(15, 23, 72, 1);;
-            box-sizing: border-box;
+            box-sizing: border-box; /* Учитываем границы в размерах */
             margin-left: 0px;
         }
         .pdf-summary-big{
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-            width: 100%; 
-            height: 20px; 
+            display: flex; /* Включаем Flexbox */
+            justify-content: center; /* Горизонтальное выравнивание по центру */
+            align-items: center; /* Вертикальное выравнивание по центру */
+            width: 100%; /* Ширина 100% контейнера */
+            height: 20px; /* Фиксированная высота */
             border: 0px solid rgba(15, 23, 72, 1);
             font-size: 18px;
             font-family: 'Arial', rgb(0, 0, 0);
-            box-sizing: border-box; 
+            box-sizing: border-box; /* Учитываем границы в размерах */
             margin-right: 50px;
             margin-left: 10px;
             
         }
         .pdf-summary-name{
-            display: flex; 
-            align-items: center; 
-            width: 400px; 
-            height: 20px;
+            display: flex; /* Включаем Flexbox */
+            align-items: center; /* Вертикальное выравнивание по центру */
+            width: 400px; /* Ширина 100% контейнера */
+            height: 20px; /* Фиксированная высота */
             border: 0px solid rgba(15, 23, 72, 1);
             font-size: 14px;
             font-family: 'Arial', rgb(0, 0, 0);
-            box-sizing: border-box; 
+            box-sizing: border-box; /* Учитываем границы в размерах */
             margin-left: 20px; 
         }
         .pdf-summary-date{
-            display: flex;
-            justify-content: center; 
-            align-items: center; 
-            width: 100px; 
-            height: 20px;
+            display: flex; /* Включаем Flexbox */
+            justify-content: center; /* Горизонтальное выравнивание по центру */
+            align-items: center; /* Вертикальное выравнивание по центру */
+            width: 100px; /* Ширина 100% контейнера */
+            height: 20px; /* Фиксированная высота */
             border: 2px solid rgb(0, 0, 0);
             font-size: 14px;
             font-family: 'Arial', rgb(0, 0, 0);
-            box-sizing: border-box; 
+            box-sizing: border-box; /* Учитываем границы в размерах */
             margin-left: 0px; 
         }
 
         .button-container {
             display: flex;
-            max-width: 1400px; 
-            overflow-x: auto; 
+            max-width: 1400px; /* Ширина контейнера */
+            overflow-x: auto; /* Включает вертикальную прокрутку */
+            margin-top: 30px;
         }
 
         .element-wrapper {
             display: flex;
-            flex-direction: column; 
-            align-items: center; 
+            flex-direction: column; /* Размещаем кнопку элемента и пикер цвета вертикально */
+            align-items: center; /* Центрируем пикеры под кнопками */
            
         }
 
@@ -757,53 +779,56 @@
         }
 
         @media print {
-
+            /* Сбрасываем стили для печати */
             body {
                 position: static;  
                 margin: 0;
                 padding: 0;
-                scale: 95%; 
+                scale: 95%; /* Можно изменить значение для подгона контента */
             }
 
+            /* Скрываем все элементы, кроме тех, что нужно напечатать */
 
-
+            /* Делаем видимыми только нужные элементы и их содержимое */
             #end-file-1, #end-file-2, #end-file-3 {
                 visibility: visible;
                 position: static;
-                page-break-before: auto; 
+                page-break-before: auto; /* Автоматическое разбиение страниц */
                 page-break-after: auto;
             }
 
-
+            /* Останавливаем разрывы страниц внутри таблиц и изображений */
             table, img {
                 page-break-inside: avoid;
             }
 
-           
+            /* Стиль для каждого блока */
             #end-file-1, #end-file-2, #end-file-3 {
-                width: 100%; 
-                margin-bottom: 5px; 
+                width: 100%; /* Можно зафиксировать ширину, например, 1000px для большей консистентности */
+                margin-bottom: 5px; /* Разделяем элементы */
                 padding: 0px;
-                box-shadow: none; 
-                border: none; 
+                box-shadow: none; /* Убираем тени */
+                border: none; /* Убираем границы */
             }
 
+            /* Устанавливаем точные отступы для каждого блока */
             #end-file-1 {
                 margin-top: 0;
                 
             }
 
             #end-file-2 {
-                margin-top: 0px; 
+                margin-top: 0px; /* Добавляем отступы вместо отрицательных значений */
             }
 
             #end-file-3 {
-                margin-top: 0px; 
+                margin-top: 0px; /* Добавляем отступы вместо отрицательных значений */
             }
-            /* size of the printed document */
+            
+            /* Устанавливаем фиксированные размеры, чтобы одинаково рендерилось в разных браузерах */
             @page {
-                size: A4; 
-                margin: 10mm; 
+                size: A4; /* Или можно использовать размер, подходящий вашему контенту, например "letter" */
+                margin: 10mm; /* Поля страницы, чтобы контент не обрезался */
             }
         }
         .popup {
@@ -876,7 +901,15 @@
                 height: 30px;
                 width: 150px;
         }
+        .left-buttons h4 {
+            font-size: 19px; /* Размер шрифта заголовка */
+            font-weight: bold; /* Полужирный текст */
+            margin: 0px; /* Отступ между заголовком и кнопками */
+            color: #333; /* Цвет заголовка */
+        }
 
+
+        /* Адаптивные стили */
     </style>
 </head>
 <body>
@@ -916,10 +949,10 @@
         </div>
         <div class="table-container">
             <table id="summaryTable1" class="summary-table">
-                <!--  Content of the table summaryTable1 -->
+                <!-- Содержимое таблицы summaryTable1 -->
             </table>
             <table id="dataTable1">
-                <!--  Content of the table dataTable1 -->
+                <!-- Содержимое таблицы dataTable1 -->
             </table>
         </div>
     </div>
@@ -945,10 +978,10 @@
         </div>
         <div class="table-container">
             <table id="summaryTable2" class="summary-table">
-                <!--  Content of the table summaryTable2 -->
+                <!-- Содержимое таблицы summaryTable2 -->
             </table>
             <table id="dataTable2">
-                <!--  Content of the table dataTable2 -->
+                <!-- Содержимое таблицы dataTable2 -->
             </table>
         </div>
     </div>
@@ -961,7 +994,7 @@
         </div>
         <div class="controls">
             <label><b>Quelle:</b></label> 
-            <button class="choise-of-the-quelle" data-tab="3" data-tab-number = "3"  value = "Karabo">Karabo</button>
+            <button class="choise-of-the-quelle" data-tab="3" data-tab-number = "3" value = "Karabo">Karabo</button>
 
             <label><b>Used measurements</b> From:              
                 <input type="number" id="startInterval3" value="1" min="1">
@@ -974,10 +1007,10 @@
         </div>
         <div class="table-container">
             <table id="summaryTable3" class="summary-table">
-                <!--  Content of the table summaryTable3 -->
+                <!-- Содержимое таблицы summaryTable3 -->
             </table>
             <table id="dataTable3">
-                <!--  Content of the table dataTable3 -->
+                <!-- Содержимое таблицы dataTable3 -->
             </table>
         </div>
     </div>
@@ -990,7 +1023,7 @@
         </div>
         <div class="controls">
             <label><b>Quelle:</b></label> 
-            <button class="choise-of-the-quelle" data-tab="4" data-tab-number = "4"  value = "Karabo">Karabo</button>
+            <button class="choise-of-the-quelle" data-tab="4" data-tab-number = "4" value = "Karabo">Karabo</button>
 
             <label><b>Used measurements</b> From:              
                 <input type="number" id="startInterval4" value="1" min="1">
@@ -999,14 +1032,14 @@
                 <input type="number" id="endInterval4" value="100" min="1">
             </label>
             <button class="last100" style="margin-left: 10px;" data-tab="4" value ="all">Last 100 measurements</button>
-            <button class="sendToComparison" data-tab="4" data-ref="2" style="margin-left: 10px;" data-tab="4">Send to comparison</button>
+            <button class="sendToComparison" data-tab="4" data-ref="2" style="margin-left: 10px;">Send to comparison</button>
         </div>
         <div class="table-container">
             <table id="summaryTable4" class="summary-table">
-                <!--  Content of the table summaryTable4 -->
+                <!-- Содержимое таблицы summaryTable4 -->
             </table>
             <table id="dataTable4">
-                <!--  Content of the table dataTable4 -->
+                <!-- Содержимое таблицы dataTable4 -->
             </table>
         </div>
     </div>
@@ -1018,23 +1051,23 @@
         <div class="controls">
             <div class="table-container-comp">
                 <table id="summaryTable5" class="summary-table">
-                    <!--  Content of the table summaryTable5 -->
+                    <!-- Содержимое таблицы summaryTable5 -->
                 </table>
                 <table id="dataTable5">
-                    <!--  Content of the table dataTable5 -->
+                    <!-- Содержимое таблицы dataTable5 -->
                 </table>
             </div>
         </div>
         <br><br>
-        <!-- Label "Data average" -->
+        <!-- Лейбл "Data average" -->
         <label><b>Data average</b></label>
         <div class="controls">
             <div class="table-container-comp">
                 <table id="summaryTable6" class="summary-table">
-                    <!--  Content of the table summaryTable6 -->
+                    <!-- Содержимое таблицы summaryTable6 -->
                 </table>
                 <table id="dataTable6">
-                    <!--  Content of the table dataTable6 -->
+                    <!-- Содержимое таблицы dataTable6 -->
                 </table>
             </div>
         </div>
@@ -1042,10 +1075,10 @@
         <div class="controls">
             <div class="table-container-comp">
                 <table id="summaryTable7" class="summary-table">
-                    <!--  Content of the table summaryTable6 -->
+                    <!-- Содержимое таблицы summaryTable6 -->
                 </table>
                 <table id="dataTable7">
-                    <!--  Content of the table dataTable6 -->
+                    <!-- Содержимое таблицы dataTable6 -->
                 </table>
             </div>
         </div>
@@ -1053,66 +1086,99 @@
     <div id="tab6" class="tab-content">
         <h3>Data Visualization</h3>
         
-        <!-- container for the diagram-->
+        <!-- Контейнер для диаграммы -->
         <div id="menu-1">
             <div id="bar-line">
-                <!-- left side -->
-                <div class="left-buttons">
-                    <!-- first group of the buttons  -->
-                    <div class="button-group">
-                        <input type="color" id="colorPicker_reference_bar" style = "width: 15px; height: 50px; margin-right: 0;" value="#4BC0C0">
-                        <button id="toggleChartFromTable5" class="button-add-grey" >Add/delete Reference<br><b>(chart)</b></button>
+                <!-- Левая часть: две строки кнопок -->
+                <div class="left-buttons" style = "margin-right:10px;">
+                    <!-- Первая группа кнопок -->
+                    <h4>Reference: </h4>
+                    <div class="button-group" >
+                        <input type="color" id="colorPicker_reference_bar" style = "width: 15px; height: 50px; margin-right: 0px;" value="#4BC0C0">
+                        <button id="toggleChartFromTable5" class="button-add-grey_visualisation" >Bar</button>
                         <div id="opacityPopup_reference" class="popup" style="display: none;">
                             <label for="opacityInput_reference_bar">Opacity (0 - 100%):</label>
                             <input type="number" id="opacityInput_reference_bar" min="0" max="100" step="5" value="40">
                             <button id="applyOpacity_reference">Apply</button>
                         </div>
-                        <input type="color" id="colorPicker_sample_bar" style = "width: 15px; height: 50px;  margin-right: 0px;" value="#ff6384">
-                        <button id="toggleChartFromTable6" class="button-add-grey">Add/delete Data<br><b>(chart)</b></button>
+                        <input type="color" id="colorPicker_reference_line" style = "width: 15px; height: 50px; margin-right: 0px;" value="#4BC0C0">
+                        <button id="toggleChartFromTable5-2" class="button-add-grey_visualisation"  style = " margin-right:10px;">Line</b></button>
+                    </div>
+                    <div class="button-group">
+                        <input type="color" id="colorPicker_vacuum_reference" style = "width: 15px; height: 50px; margin-right: 0px;" value="#ff4400">
+                        <button id="vacuum_test_reference" class="button-add-grey" source = "reference">Vacuum Criterium</button>
+                    </div>    
+                </div>
+                <div class="left-buttons" style = "margin-right:10px;">
+                    <h4>Sample: </h4>
+                    <div class="button-group">
+                        <input type="color" id="colorPicker_sample_bar" style = "width: 15px; height: 50px;  margin-right:0px;" value="#ff6384">
+                        <button id="toggleChartFromTable6" class="button-add-grey_visualisation">Bar</b></button>
                         <div id="opacityPopup_sample" class="popup" style="display: none;">
                             <label for="opacityInput_sample_bar">Opacity (0 - 100%):</label>
                             <input type="number" id="opacityInput_sample_bar" min="0" max="100" step="5" value="40">
                             <button id="applyOpacity_sample">Apply</button>
                         </div>
+                        <input type="color" id="colorPicker_sample_line" style = "width: 15px; height: 50px;margin-right:0px;" value="#FF6384">
+                        <button id="toggleChartFromTable6-2" class="button-add-grey_visualisation" style = " margin-right:10px;">Line</b></button>
+                    </div>
+                    <div class="button-group">
+                        <input type="color" id="colorPicker_vacuum_sample" style = "width: 15px; height: 50px; margin-right: 0px;" value="#ff4400">
+                        <button id="vacuum_test_sample" class="button-add-grey" source = "sample">Vacuum Criterium</button>
+                    </div>
+                </div>  
+                <div class="left-buttons" style = "margin-right:10px;">
+                    <h4>Comparison: </h4>
+                    <div class="button-group">
                         <input type="color" id="colorPicker_comparison_bar" style = "width: 15px; height: 50px;  margin-right:0px; border-width: 0px;" value="#464544">
-                        <button id="toggleChartFromTable7" class="button-add-grey">Add the comparison<br><b>(chart)</b></button>
+                        <button id="toggleChartFromTable7" class="button-add-grey_visualisation">Bar</button>
                         <div id="opacityPopup_comparison" class="popup" style="display: none;">
                             <label for="opacityInput_comarison_bar">Opacity (0 - 100%):</label>
                             <input type="number" id="opacityInput_comparison_bar" min="0" max="100" step="5" value="40">
                             <button id="applyOpacity_comparison">Apply</button>
                         </div>
-                        <input type="color" id="colorPicker_vacuum_100" style = "width: 15px; height: 50px; margin-right: 0px;" value="#ff4400">
-                        <button id="vacuum_100" class="button-add-grey">Add the Vacuum Line<br><b>(1/100)</b> (for data) </button>
+                        <input type="color" id="colorPicker_comparison_line" style = "width: 15px; height: 50px; margin-right: 0px;" value="#464544">
+                        <button id="toggleChartFromTable7-2" class="button-add-grey_visualisation"style = " margin-right:10px;" >Line</b></button>
+                    </div>
+                    <div class="button-group">
+                        <input type="color" id="colorPicker_vacuum_comparison" style = "width: 15px; height: 50px; margin-right: 0px;" value="#ff4400">
+                        <button id="vacuum_test_comparison" class="button-add-grey" source = "comparison">Vacuum Criterium</button>
+                    </div>
+                </div>
+                <div class="left-buttons" style = "margin-right:10px;" >
+                    <h4>Scale: </h4>
+                    <div class="button-group">
                         <button class="button-add-grey"><label for="yMin">Y Min:</label>
                         <input type="number" id="yMin" step="0.1" value="1e-15"></button>
                         <button class="button-add-grey"><label for="xMin">X Min:</label>
-                        <input type="number" id="xMin" step="0.1" value="1"></button>
-                        <button id="saveButton" class="button-add-grey">Save the plot</button>
-                        <button id="downloadBtn_refernce" class="button-add-grey">Send to result sheet<br><b>Reference</b></button>
-                        <button id="clearHistograms" class="button-add-grey">Clear the plot</button>
+                        <input type="number" id="xMin" step="1" value="1"></button>
                     </div>
-                    <!-- Second group of the button-->
+                    <!-- Вторая группа кнопок -->
                     <div class="button-group">
-                        <input type="color" id="colorPicker_reference_line" style = "width: 15px; height: 50px; margin-right: 0px;" value="#4BC0C0">
-                        <button id="toggleChartFromTable5-2" class="button-add-grey">Add/delete Reference<br><b>(line)</b></button>
-                        <input type="color" id="colorPicker_sample_line" style = "width: 15px; height: 50px; margin-right: 0px;" value="#FF6384">
-                        <button id="toggleChartFromTable6-2" class="button-add-grey">Add/delete Data<br><b>(line)</b></button>
-                        <input type="color" id="colorPicker_comparison_line" style = "width: 15px; height: 50px; margin-right: 0px;" value="#464544">
-                        <button id="toggleChartFromTable7-2" class="button-add-grey">Add the comparison<br><b>(line)</b></button>
-                        <input type="color" id="colorPicker_vacuum_1000" style = "width: 15px; height: 50px; margin-right: 0px;" value="#ff4400">
-                        <button id="vacuum_1000" class="button-add-grey">Add the Vacuum Line<br><b>(1/1000)</b> (for data) </button>
                         <button class="button-add-grey"><label for="yMax">Y Max:</label>
                         <input type="number" id="yMax" step="0.1" value="1e-6"></button>
                         <button class="button-add-grey"><label for="xMax">X Max:</label>
-                        <input type="number" id="xMax" step="0.1" value="100"></button>
-                        <button id="downloadBtn_sample" class="button-add-grey">Send to result sheet<br><b>Sample</b></button>
-                        <button id="downloadBtn_summary" class="button-add-grey">Send to result sheet<br><b>Summary</b></button>                        
+                        <input type="number" id="xMax" step="1" value="100"></button>                       
                     </div>
+                </div>
+                <div class="left-buttons" >
+                    <h4>Send to the report sheet: </h4>
+                    <div class="button-group">
+                        <button id="downloadBtn_refernce" class="button-add-grey"><b>Reference plot</b></button>
+                        <button id="downloadBtn_sample" class="button-add-grey"><b>Sample plot</b></button>
+                        <button id="downloadBtn_summary" class="button-add-grey"><b>Summary plot</b></button>
+                    </div>
+                    <div class="button-group">
+                        <button id="saveButton" class="button-add-grey">Save the plot</button>
+                        <button id="clearHistograms" class="button-add-grey">Clear the plot</button>
+                        
+                    </div>
+                        
                 </div>
             </div>
         </div>
         <div class="button-container">
-            <!-- element button and corresponding color button  -->
+            <!-- Для каждой кнопки элемента создаем отдельный контейнер с цветовым пикером под ней -->
             <div class="element-wrapper">
                 <button id="addCalculatedHistogramsButton_Water" class="square-button-active" element="Water">H<sub>2</sub>O</button>
                 <input type="color" id="colorPicker_Water" value="#00BFFF">
@@ -1146,7 +1212,7 @@
                 <input type="color" id="colorPicker_Tetrafluoromethane" value="#dc43f3">
             </div>
             <div class="element-wrapper">
-                <button id="addCalculatedHistogramsButton_Hydrogen" class="square-button-active" element="Hydrogen">H<sub>2</sub></button>
+                <button id="addCalculatedHistogramsButton_Hydrogen" class="square-button-active" element="Hydrogen">H</button>
                 <input type="color" id="colorPicker_Hydrogen" value="#959296">
             </div>
             
@@ -1389,7 +1455,6 @@
         <div id="chartContainer">
             <canvas id="myChart"></canvas>
         </div>
-        <!-- Ваши таблицы и остальной контент для вкладки 6 -->
     </div>
 
     <div id="tab7" class="tab-content">
@@ -1714,6 +1779,7 @@
             if (file) {
                 filestatus.push("changed" + tabNumber);
                 const type_file = document.querySelector('.choise-of-the-quelle' + '[data-tab-number="' +tabNumber + '"]');
+                console.log(type_file.getAttribute('value'))
                 // Вызов функции обработки файла
                 if (type_file.getAttribute('value') === "Karabo") {
                     processFile2(file, 'dataTable' + tabNumber, 'summaryTable' + tabNumber, tabNumber, filestatus);
@@ -1726,8 +1792,9 @@
     function initializeButtons() {
     // Get all buttons with the class 'choise-of-the-quelle'
         const buttons = document.querySelectorAll('.choise-of-the-quelle');
+
         buttons.forEach((button) => {
-            let isKarabo = true; // Variable to track the current state of the button
+            let isKarabo = false; // Variable to track the current state of the button
 
             button.addEventListener('click', (event) => {
                 // Get the tab number from the button's data attribute
@@ -1765,6 +1832,7 @@
             alert('Choose the file');
             return;
         }
+
         const reader = new FileReader();
         reader.onload = function(e) {
             const lines = e.target.result.trim().split('\n');
@@ -1778,7 +1846,7 @@
             // Заголовок таблицы данных
             const dataHeaderRow = document.createElement('tr');
             const dataFirstCell = document.createElement('th');
-            dataFirstCell.textContent = '№';
+            dataFirstCell.textContent = 'Индекс';
             dataHeaderRow.appendChild(dataFirstCell);
             for (let i = 1; i <= numLabels; i++) {
                 const th = document.createElement('th');
@@ -1828,11 +1896,6 @@
             }
 
             // Заменяем отрицательные значения на ноль для определенных вкладок
-            if (typeof tabNumber === 'string') {
-                tabNumber = parseInt(tabNumber); // Преобразуем строку в число
-            }
-
-            // Заменяем отрицательные значения на ноль для определенных вкладок
             if (tabNumber === 2 || tabNumber === 4) {
                 data.forEach(row => {
                     for (let i = 1; i < row.length; i++) {
@@ -1842,6 +1905,7 @@
                     }
                 });
             }
+            console.log (filestatus)
             displayData(dataTableId, data, tabNumber, filestatus);
             updateSummaryTable(summaryTableId, data, tabNumber);
             updateAverages(dataTableId, data, tabNumber);
@@ -1855,6 +1919,7 @@
             alert('Choose the file');
             return;
         }
+
         const reader = new FileReader();
         reader.onload = function(e) {
             const lines = e.target.result.trim().split('\n');
@@ -1908,15 +1973,12 @@
                 previousRow = row.slice(); // Копируем текущую строку
                 data.push(row);
             });
-            let tabNumber1 = String.valueOf(tabNumber)
+
             // Сохраняем данные для дальнейшего использования
             if (tabNumber === 1) {
                 data1 = data;
             } else if (tabNumber === 3) {
                 data3 = data;
-            }
-            if (typeof tabNumber === 'string') {
-                tabNumber = parseInt(tabNumber); // Преобразуем строку в число
             }
 
             // Заменяем отрицательные значения на ноль для определенных вкладок
@@ -1928,8 +1990,8 @@
                         }
                     }
                 });
-                
             }
+
             displayData(dataTableId, data, tabNumber, filestatus);
             updateSummaryTable(summaryTableId, data, tabNumber);
             updateAverages(dataTableId, data, tabNumber);
@@ -1939,6 +2001,7 @@
     }
 
     function displayData(tableId, data, tabNumber,filestatus) {
+
         let startInterval = 0;
         let endInterval = 100;
         if (!Array.isArray(filestatus)) {
@@ -1950,6 +2013,7 @@
 
             endInterval = data[data.length - 1][0]; 
             document.getElementById('endInterval' + tabNumber).value = endInterval; 
+
             // Убираем "changed" + tabNumber из filestatus
             filestatus = filestatus.filter(item => item !== "changed" + tabNumber);
             
@@ -2006,6 +2070,7 @@
 
     // Фильтрация данных по промежутку
         const filteredData = data.filter(row => row[0] >= startInterval && row[0] <= endInterval);
+
         filteredData.forEach(row => {
             const tr = document.createElement('tr');
         
@@ -2073,6 +2138,7 @@
 
         // Удаляем старые строки сравнения
         document.querySelectorAll(`#${tableId} .compare-row`).forEach(row => row.remove());
+
         // Обработка строки с средним значением
         let avgRow = document.querySelector(`#${tableId} .average-row`);
         if (!avgRow) {
@@ -2151,6 +2217,7 @@
         const compareLabelCell = document.createElement('td');
         compareLabelCell.textContent = label;
         compareRow.appendChild(compareLabelCell);
+
         // Сравнение ячеек только в указанном диапазоне
         for (let i = 1; i <= averages.length; i++) { // Используем <= для включения последнего элемента
             const compareTd = document.createElement('td');
@@ -2270,8 +2337,6 @@
                             color_1 = document.getElementById("colorPicker_sample_bar").value || 'rgba(255, 99, 132, 0.3)';
                             stackGroupX = 'StackGroupX2';
                             op = document.getElementById("opacityInput_reference_bar").value/100;
-                        }else if (ds.label === 'Comparison') {
-                            color_1 = document.getElementById("colorPicker_comparison_bar").value || 'rgba(255, 99, 132, 0.3)';
                         } else if (ds.label === 'Reference measurment line') {
                             color_1 = "white";
 
@@ -2315,11 +2380,7 @@
                             fill: chartType === 'line' ? false : true, // Если это линейный график, отключаем заливку
                             spanGaps: true,  // Соединяем точки, даже если есть пропуски
                             showLine: chartType === 'line' ? true : false,  // Линии между точками
-                            pointRadius: chartType === 'line' ? 0 : 0, // Показываем точки только для линий
-                            barPercentage: 0.9,      // Ширина столбцов внутри группы (от 0 до 1, 0.9 - широкие столбцы)
-                            categoryPercentage: 1.0, // Полное использование доступного пространства для столбцов
-                            maxBarThickness: 90,
-                        
+                            pointRadius: chartType === 'line' ? 0 : 0  // Показываем точки только для линий
                         };
                     })
                 },
@@ -2454,32 +2515,34 @@
                     }
                 }
             });
-
             document.getElementById('clearHistograms').addEventListener('click', function() {
-                // function to delete the class from the button 
+                // Очищаем данные и обновляем график
+
+
+                // Функция для удаления класса у кнопок
                 function removeClassFromButtons(className) {
                     const buttons = document.querySelectorAll(className);
                     buttons.forEach(button => {
-                        button.classList.remove(className.substring(1)); // delete the . from the class
+                        button.classList.remove(className.substring(1)); // Убираем точку из имени класса
                     });
                 }
 
-                // delete all the classes from the buttons 
+                // Удаляем классы из кнопок
                 removeClassFromButtons('.button-add-comparison');
                 removeClassFromButtons('.button-add-data');
                 removeClassFromButtons('.button-add-reference');
 
-                // all button with the class name "addCalculatedHistogramsButton_"
+                // Находим все кнопки с ID, начинающимся на "addCalculatedHistogramsButton_"
                 const squareButtons = document.querySelectorAll('button[class^="square-button-"]');
                 squareButtons.forEach(button => {
                     const classes = Array.from(button.classList);
                     classes.forEach(className => {
                         if (className.startsWith('square-button-')) {
-                            button.classList.remove(className); // delete the class 
+                            button.classList.remove(className); // Удаляем класс
                             button.classList.add('square-button-active')
                         }
                     });
-                    button.style.backgroundColor = ''; // delete the color of the button
+                    button.style.backgroundColor = ''; // Сбрасываем цвет кнопки
                 });
                 datasets = [];
                 datasetList = {};
@@ -2571,7 +2634,7 @@
                 }   
             }
         }   
-        let buttonActive = false; // global flag for the state of the buttons 
+        let buttonActive = false; // Глобальный флаг для отслеживания состояния кнопки
 
         function addArrays(arr1, arr2) {
             return arr1.map((value, index) => value + arr2[index]);
@@ -2598,12 +2661,12 @@
                 if (mainDatasets.length === 0) {
                     return 0;
                 }
-        //
-                const greyColor = 'rgba(128, 128, 128, 0.6)';  // color for the border 
-                let added = false;  // flag for the 
+        // Если нет, добавляем "вычисленные" гистограммы
+                const greyColor = 'rgba(128, 128, 128, 0.6)';  // Цвет новой гистограммы
+                let added = false;  // Флаг для отслеживания добавления новых данных
                 let info_peaks = []
                 Object.keys(datasets).forEach((label) => {
-                    if (!label.includes("Calculated") && !label.includes("Comparison") && !label.includes("line") &&  !label.includes("Vacuum test")) {
+                    if (!label.includes("Calculated") && !label.includes("Comparison") && !label.includes("line")) {
                         const oldData = datasets[label].data;
                         let oldGreyData = datasets[`Calculated ${label}`]?.data || Array(100).fill(0);
                         const oldGreyPeaks = datasets[`Calculated ${label}`]?.peaks|| [];
@@ -2671,8 +2734,8 @@
                             "Freon11": [[101, 100], [103, 60], [35, 16], [66, 15], [47, 12]],
                             "Xenon": [[132, 100], [129, 98], [131, 79], [134, 39], [136, 33]]
                         };
-            // settings of the new histograms 
-                        const totalColumns = 100;  // the general number of the columns 
+            // Устанавливаем метки и значения для новой гистограммы
+                        const totalColumns = 100;  // Определяем общее количество столбцов
                         let newDataArray = new Array(totalColumns).fill(0);
                         if (mks_peaks[chem]) {
                             elementData = mks_peaks[chem];
@@ -2682,12 +2745,12 @@
                             newDataArray[index_max-1] = max_peak; 
                             button_color = selectedColor || '#00BFFF'; 
 
-            // add the data on the corresponding place 
+            // Вставляем данные на соответствующие позиции
                             elementData.slice(1).forEach(([column, percentage]) => {
                                 const colValue = max_peak || 0; 
                                 if (totalColumns > column) newDataArray[column - 1] = colValue * (percentage / 100);
                             });
-            // add the x-axes labels 
+            // Сопоставляем метки
                             for (let i = 1; i <= totalColumns; i++) {
                                 newLabels.push(i.toString());
                             }
@@ -2695,11 +2758,11 @@
                         }           
                         if (!datasetList[label]?.includes(chem)) {
                             if (!Array.isArray(datasetList[label])) {
-                                datasetList[label] = [];  // create the list of the dataset labels when it still does not exist 
+                                datasetList[label] = [];  // Создаем массив, если он не существует
                             }
-                            datasetList[label].push(chem); // add the element to the datasetList 
+                            datasetList[label].push(chem);
                             buttonActive = 1;
-                            // add the dataset of the element to the list with the data need to be plotted 
+                            // Добавляем новый набор данных
                             datasets[`Calculated ${label} ${chem}`] = {
                                 labels: newLabels,
                                 data: newDataArray,
@@ -2717,47 +2780,47 @@
                         } else {
                             const index = datasetList[label].indexOf(chem);
                             if (index !== -1) {
-                                datasetList[label].splice(index, 1);  // delete the label and plot from the list of the labels 
+                                datasetList[label].splice(index, 1);  // Удаляем элемент
                             }
-                            delete datasets[`Calculated ${label} ${chem}`]; //delete the dataset from the list of the datasets 
+                            delete datasets[`Calculated ${label} ${chem}`];
                             buttonActive = 0;
                         }
 
                     }
                 });
 
-                updateChart(); // update the plot 
-
-                return buttonActive ;  // return of index p (you will see it down)
+                updateChart();
+        // Устанавливаем флаг состояния кнопки, так как данные добавлены
+                return buttonActive ;  // Возвращаем 1, если данные были добавлены, иначе 0
             }
         }
         function handleButtonClick(button) {
             
 
-            let p = 0; // initilization of the p - needed to control the color of the button, when it is active or not 
+            let p = 0; // Инициализируем p здесь, чтобы она была доступна позже
             let colorPicker, element;
 
             element = button.getAttribute('element');
-            const colorPickerId = `colorPicker_${element}`; // name of the color plate used under this button 
-            colorPicker = document.getElementById(colorPickerId).value; // take the chosen color from the color plate 
+            const colorPickerId = `colorPicker_${element}`; // Получаем id цветового пикера, связанного с кнопкой
+            colorPicker = document.getElementById(colorPickerId).value; // Получаем выбранный цвет
             p = addCalculatedHistograms(element, colorPicker); // Передаем цвет в функцию добавления гистограммы
 
-            // save the status of the button, based on the active or not active state (p index after addCalculatedHistograms)
+            // Сохраняем текущее состояние кнопки, если данные добавлены
             if (p===1) {
-                button.classList.add(`square-button-${element}`); // adding the uniqe class for the button 
-                button.style.backgroundColor = colorPicker; // changing the color on the chosen one 
+                button.classList.add(`square-button-${element}`); // Добавляем уникальный класс для кнопки
+                button.style.backgroundColor = colorPicker; // Меняем цвет кнопки на выбранный
             } else {
                 button.classList.remove(`square-button-${element}`);
-                button.style.backgroundColor = ''; // 
+                button.style.backgroundColor = ''; // Сбрасываем цвет кнопки
             }
         }
 
-        //  Add event handlers for all buttons
-        const buttons = document.querySelectorAll('[id^="addCalculatedHistogramsButton_"]'); // Find all the buttons
+        // Добавляем обработчики событий для всех кнопок
+        const buttons = document.querySelectorAll('[id^="addCalculatedHistogramsButton_"]'); // Находим все кнопки
 
         buttons.forEach(button => {
             button.addEventListener('click', function() {
-                handleButtonClick(this); // Call the general function with the current button
+                handleButtonClick(this); // Вызываем общую функцию с текущей кнопкой
             });
         });
 
@@ -2765,50 +2828,44 @@
         let test = 0;
         function toggleDataFromTable(tableId, label, chartType) {
             if (datasets[label]) {
-                // delete the data when it is alredy exist 
+                // Удаляем набор данных и его цвет
                 delete datasets[label];
                 delete datasetColors[label];
                 test = 0;
             } else {
-                const { labels, data } = getDataFromTable(tableId, label);  // get the data with the function getDataFromTable 
+                const { labels, data } = getDataFromTable(tableId, label);  // Получаем данные
 
-                // logic for the line plot  "Vacuum test 1/100"
-                if (label === "Vacuum test 1/100") {
-                    const data100 = new Array(data.length).fill(null);  // Create an array of empty data
-                    const referenceValue = data[17];  // 18th element (index 17)
+                // Логика для Vacuum test 1/100
+                if (label.includes("Vacuum Crit.")) {
+                    const data100 = new Array(data.length).fill(null);  // Создаем массив пустых данных
+                    const referenceValue = data[17];  // 18-й элемент (индекс 17)
                     for (let i = 0; i < 45; i++) {
-                        data100[i] = referenceValue / 100;  // Values for indexes 1 to 45
+                        data100[i] = referenceValue / 100;  // Значения от 1 до 45
                     }
-                    datasets[label] = {
-                        data: data100,    // Data for Vacuum test 1/100
-                        label: label,
-                        borderColor: document.getElementById('colorPicker_vacuum_100').value,  // color of the line
-                        showLine: true,    // type line for the scatter 
-                        fill: false,       // Disable filling under the curve
-                        type: 'line',
-                        labels: labels,
-                        backgroundColor: "white",
-                    };
-                }
-                // logic for the line plot  "Vacuum test 1/1000"
-                else if (label === "Vacuum test 1/1000") {
-                    const data1000 = new Array(data.length).fill(null);  // Create an array of empty data
-                    const referenceValue = data[17];  // 18th element (index 17)
                     for (let i = 44; i < data.length; i++) {
-                        data1000[i] = referenceValue / 1000;  // Values for indexes 46 to 100
+                        data100[i] = referenceValue / 1000;  // Значения от 45-го элемента
+                    }
+                    if (label.includes("reference")) {
+                        color_color = 'colorPicker_vacuum_reference';
+                    }
+                    if (label.includes("sample")) {
+                        color_color = 'colorPicker_vacuum_sample';
+                    }
+                    if (label.includes("comparison")) {
+                        color_color = 'colorPicker_vacuum_comparison';
                     }
                     datasets[label] = {
-                        data: data1000,    // Данные для Vacuum test 1/1000
+                        data: data100,    // Данные для Vacuum test 1/100
                         label: label,
-                        borderColor: document.getElementById('colorPicker_vacuum_1000').value,  // color of the line
-                        showLine: true,    // type line for the scatter 
-                        fill: false,        // Disable filling under the curve
+                        borderColor: document.getElementById(color_color).value,  // Цвет линии
+                        showLine: true,    // Показывать линию для scatter
+                        fill: false,       // Отключить заполнение под кривой
                         type: 'line',
                         labels: labels,
                         backgroundColor: "white",
                     };
                 }
-                // other cases 
+                // Остальные случаи
                 else {
                     if (chartType === 'scatter') {
                         let color_plot = '';
@@ -2823,11 +2880,11 @@
                         }
 
                         datasets[label] = {
-                            data: data,         // data used for the line plot 
+                            data: data,         // Данные для scatter
                             label: label,
-                            borderColor: color_plot,   // Color of the line plot
-                            showLine: true,     // Show line for scatter
-                            fill: false,        //  Disable filling under the curve
+                            borderColor: color_plot,   // Цвет линии
+                            showLine: true,     // Показывать линию для scatter
+                            fill: false,        // Отключить заполнение под кривой
                             type: 'line',
                             labels: labels,
                             backgroundColor: "white",
@@ -2844,14 +2901,14 @@
                         if (label == "Comparison bar") {
                             color = document.getElementById('colorPicker_comparison_bar').value;
                         }
-                        datasetColors[label] = color;  // Assign color to other charts
+                        datasetColors[label] = color;  // Назначаем цвет для других графиков
                     }
                 }
 
                 test = 1;
             }
 
-            updateChart();  
+            updateChart();  // Обновляем график
             return test;
         }
 
@@ -2911,22 +2968,63 @@
                 this.classList.remove('button-add-comparison');
             }
         });
-        document.getElementById('vacuum_1000').addEventListener('click', function () {
-            p = toggleDataFromTable('dataTable6', 'Vacuum test 1/1000', 'scatter');
-            if (p===1) {
-                this.classList.add('button-add-vacuum-1000');
-            } else {
-                this.classList.remove('button-add-vacuum-1000');
-            }
-        });
-        document.getElementById('vacuum_100').addEventListener('click', function () {
-            p = toggleDataFromTable('dataTable6', 'Vacuum test 1/100', 'scatter');
+
+        document.getElementById('vacuum_test_reference').addEventListener('click', function () {
+            
+            const source1 = this.getAttribute('source');
+            const tableMap = {
+                "reference": 'dataTable5',
+                "sample": 'dataTable6',
+                "comparison": 'dataTable7'
+            };
+            console.log (source1, tableMap[source1] )
+
+            p = toggleDataFromTable(tableMap[source1], 'Vacuum Crit. for '+ source1, 'scatter');
             if (p===1) {
                 this.classList.add('button-add-vacuum-100');
             } else {
                 this.classList.remove('button-add-vacuum-100');
             }
         });
+
+        document.getElementById('vacuum_test_sample').addEventListener('click', function () {
+            
+            const source1 = this.getAttribute('source');
+            const tableMap = {
+                "reference": 'dataTable5',
+                "sample": 'dataTable6',
+                "comparison": 'dataTable7'
+            };
+            console.log (source1, tableMap[source1] )
+
+            p = toggleDataFromTable(tableMap[source1], 'Vacuum Crit. for '+ source1, 'scatter');
+            if (p===1) {
+                this.classList.add('button-add-vacuum-100');
+            } else {
+                this.classList.remove('button-add-vacuum-100');
+            }
+        });
+
+        document.getElementById('vacuum_test_comparison').addEventListener('click', function () {
+            
+            const source1 = this.getAttribute('source');
+            const tableMap = {
+                "reference": 'dataTable5',
+                "sample": 'dataTable6',
+                "comparison": 'dataTable7'
+            };
+            console.log (source1, tableMap[source1] )
+
+            p = toggleDataFromTable(tableMap[source1], 'Vacuum Crit. for '+ source1, 'scatter');
+            if (p===1) {
+                this.classList.add('button-add-vacuum-100');
+            } else {
+                this.classList.remove('button-add-vacuum-100');
+            }
+        });
+
+        
+
 
         document.getElementById('yMin').addEventListener('input', function () {
             yMin = parseFloat(this.value);
@@ -2970,7 +3068,7 @@
         });
 
 
-    // Update the chart size when the window size changes
+    // Обновляем размеры графика при изменении размера окна
         window.addEventListener('resize', () => {
             const canvas = document.getElementById('myChart');
             const dpr = window.devicePixelRatio || 1;
@@ -2983,7 +3081,7 @@
             }
         });
 
-        updateChart(); // Update the chart on page load
+        updateChart(); // Обновляем график при загрузке страницы
     });
 
 
@@ -2992,9 +3090,10 @@
         const table_data = document.getElementById(dataTableId);
         const lastRowIndex = table_sum.rows.length - 1;
 
-    // Check that there are rows in the tables
-        if (lastRowIndex < 0) return; // If the table is empty, exit the function
-   // Clone the last line
+    // Проверяем, что в таблицах есть строки
+        if (lastRowIndex < 0) return; // Если таблица пуста, выходим из функции
+
+    // Клонируем последнюю строку
         const lastRow = table_sum.rows[lastRowIndex];
         const lastRow_data = table_data.rows[lastRowIndex];
         const rowCopy = lastRow.cloneNode(true);
@@ -3002,15 +3101,15 @@
 
         const ts = parseInt(refNumber) + 4; 
 
-    // Search for tables in a new tab
+    // Ищем таблицы на новой вкладке
         const table_sum_comp = document.getElementById('summaryTable' + ts);
         const table_data_comp = document.getElementById('dataTable' + ts);
 
-    // Clear tables before adding new data
+    // Очищаем таблицы перед добавлением новых данных
         table_sum_comp.innerHTML = '';
         table_data_comp.innerHTML = '';
 
-    // If the tables are empty, add a header
+    // Если таблицы пустые, добавляем заголовок
         if (table_sum.rows.length > 0) {
         const headerRow = table_sum.rows[0].cloneNode(true);
         table_sum_comp.appendChild(headerRow);
@@ -3020,7 +3119,7 @@
             table_data_comp.appendChild(headerRow_data);
         }
 
-    // Add cloned rows to tables in a new tab
+    // Добавляем клонированные строки в таблицы на новой вкладке
         table_sum_comp.appendChild(rowCopy);
         table_data_comp.appendChild(rowCopy_data);
     }
@@ -3031,7 +3130,7 @@
         const refRows_dat = referenceTable_dat.rows;
         const dataRows_dat = dataTable_dat.rows;
 
-  // Make sure that both tables have the same number of rows
+    // Убедимся, что обе таблицы имеют одинаковое количество строк
         if (refRows_sum.length !== dataRows_sum.length && refRows_sum.length!==0 &&  dataRows_sum.length !==0) {
             console.warn("Tables have different number of rows.");
             return;
@@ -3042,11 +3141,13 @@
         }
 
         const comparisonTable_sum = document.getElementById('summaryTable7');
-        comparisonTable_sum.innerHTML = ''; // Clear the comparison table
+        comparisonTable_sum.innerHTML = ''; // Очищаем таблицу сравнения
         const comparisonTable_dat = document.getElementById('dataTable7');
-        comparisonTable_dat.innerHTML = ''; // Clear the comparison table
+        comparisonTable_dat.innerHTML = ''; // Очищаем таблицу сравнения
 
-    // Add a header
+    // Добавляем заголовок
+
+
         const summaryHeaderRow_sum = document.createElement('tr');
         comparisonTable_sum.innerHTML = '<th>Sum</th><th>Sum>44</th><th>Ratio</th>';
         comparisonTable_sum.appendChild(summaryHeaderRow_sum);
@@ -3058,13 +3159,13 @@
         const numLabels = 100;
         for (let i = 1; i <= numLabels; i++) {
             const th = document.createElement('th');
-            th.textContent = i; // Measurement numbers in normal format
+            th.textContent = i; // Номера измерений в обычном формате
             summaryHeaderRow_dat.appendChild(th);
         }
     
 
-    // Calculate the difference
-        for (let i = 1; i < refRows_sum.length; i++) { // start with 1 to skip the header
+    // Вычисляем разницу
+        for (let i = 1; i < refRows_sum.length; i++) { // начинаем с 1, чтобы пропустить заголовок
             const refRow = refRows_sum[i];
             const dataRow = dataRows_sum[i];
             const newRow = document.createElement('tr');
@@ -3077,7 +3178,7 @@
             
 
                 const newCell = document.createElement('td');
-                newCell.innerText = diff.toExponential(4); 
+                newCell.innerText = diff.toExponential(4); // Форматируем разницу
                 newRow.appendChild(newCell);
             }
             const ratio_cell = document.createElement('td');
@@ -3090,12 +3191,12 @@
             comparisonTable_sum.appendChild(newRow);
         }
     
-        for (let i = 1; i < refRows_dat.length; i++) { // start with 1 to skip the header
+        for (let i = 1; i < refRows_dat.length; i++) { // начинаем с 1, чтобы пропустить заголовок
             const refRow = refRows_dat[i];
             const dataRow = dataRows_dat[i];
             const newRow = document.createElement('tr');
 
-        // Create the first cell with the text “Average”
+            // Создаем первую ячейку с текстом "Average"
             const averageCell = document.createElement('td');
             averageCell.innerText = "Average";
             newRow.appendChild(averageCell);
@@ -3105,7 +3206,7 @@
                 const dataCell = parseFloat(dataRow.cells[j].innerText) || 0;
                 const diff = dataCell - refCell;
                 const newCell = document.createElement('td');
-                newCell.innerText = diff.toExponential(4); // Format the difference
+                newCell.innerText = diff.toExponential(4); // Форматируем разницу
                 newRow.appendChild(newCell);
             }
 
@@ -3126,11 +3227,12 @@
         calculateDifference(referenceTable_sum, dataTable_sum,referenceTable_dat, dataTable_dat)
     
     }
-// Set event handler for “Send to comparison” buttons
+
+// Устанавливаем обработчик событий для кнопок "Send to comparison"
     document.querySelectorAll('.sendToComparison').forEach(button => {
         button.addEventListener('click', function() {
-            const tabNumber = this.getAttribute('data-tab'); // Get tab number
-            const refNumber = this.getAttribute('data-ref'); // Get the reference number
+            const tabNumber = this.getAttribute('data-tab'); // Получаем номер вкладки
+            const refNumber = this.getAttribute('data-ref'); // Получаем номер ссылки
             const summaryTableId = 'summaryTable' + tabNumber;
             const dataTableId = 'dataTable' + tabNumber;
 
@@ -3172,6 +3274,7 @@
             const dataTableId = 'dataTable' + tabNumber;
             const summaryTableId = 'summaryTable' + tabNumber;
             const type_file = document.querySelector('.choise-of-the-quelle' + '[data-tab-number="' +tabNumber + '"]');
+            console.log (type_file);
             if (document.getElementById(fileInputId).files[0]) {
                 if (type_file.getAttribute('value') === "Karabo") {
                     processFile2(document.getElementById(fileInputId).files[0], dataTableId, summaryTableId, tabNumber);
@@ -3181,11 +3284,13 @@
             }
         });
 
+        
         document.getElementById('endInterval' + tabNumber).addEventListener('change', () => {
             const fileInputId = 'fileInput' + tabNumber;
             const dataTableId = 'dataTable' + tabNumber;
             const summaryTableId = 'summaryTable' + tabNumber;
             const type_file = document.querySelector('.choise-of-the-quelle' + '[data-tab-number="' +tabNumber + '"]');
+            console.log ("type:",type_file.getAttribute('value'));
             if (document.getElementById(fileInputId).files[0]) {
                 if (type_file.getAttribute('value') === "Karabo") {
                     processFile2(document.getElementById(fileInputId).files[0], dataTableId, summaryTableId, tabNumber);
@@ -3195,53 +3300,49 @@
             }
         });
     }
-
     
-    // get the sample plot for the final document
     function downloadChart_sample() {
-        const canvas = document.getElementById('myChart');
-        const link = document.createElement('a');
-        const dataURL = canvas.toDataURL('image/png'); // Get the Data URL of the chart
-        const resultContainer_sample = document.getElementById('resultChartContainer_sample');
-        const img = document.createElement('img');
-        img.src = dataURL;
-        img.style.maxWidth = '100%';
-        resultContainer_sample.innerHTML = ''; 
-        resultContainer_sample.appendChild(img); 
+            const canvas = document.getElementById('myChart');
+            const link = document.createElement('a');
+            const dataURL = canvas.toDataURL('image/png'); // Получаем Data URL графика
+            const resultContainer_sample = document.getElementById('resultChartContainer_sample');
+            const img = document.createElement('img');
+            img.src = dataURL;
+            img.style.maxWidth = '100%';
+            resultContainer_sample.innerHTML = ''; 
+            resultContainer_sample.appendChild(img); 
 
-    }
-    // get the reference plot for the final document
-    function downloadChart_reference() {
-        const canvas = document.getElementById('myChart');
-        const link = document.createElement('a');
-        const dataURL = canvas.toDataURL('image/png'); // Get the Data URL of the chart
-        const resultContainer_reference = document.getElementById('resultChartContainer_reference');
-        const img = document.createElement('img');
-        img.src = dataURL;
-        img.style.maxWidth = '100%';
-        resultContainer_reference.innerHTML = ''; 
-        resultContainer_reference.appendChild(img); 
+        }
+        function downloadChart_reference() {
+            const canvas = document.getElementById('myChart');
+            const link = document.createElement('a');
+            const dataURL = canvas.toDataURL('image/png'); // Получаем Data URL графика
+            const resultContainer_reference = document.getElementById('resultChartContainer_reference');
+            const img = document.createElement('img');
+            img.src = dataURL;
+            img.style.maxWidth = '100%';
+            resultContainer_reference.innerHTML = ''; 
+            resultContainer_reference.appendChild(img); 
 
-    }
-    // get the comparison plot for the final document
-    function downloadChart_summary() {
-        const canvas = document.getElementById('myChart');
-        const link = document.createElement('a');
-        const dataURL = canvas.toDataURL('image/png'); // Get the Data URL of the chart
-        const resultContainer_summary = document.getElementById('resultChartContainer_summary');
-        const img = document.createElement('img');
-        img.src = dataURL;
-        img.style.maxWidth = '100%';
-        resultContainer_summary.innerHTML = ''; 
-        resultContainer_summary.appendChild(img); 
+        }
+        function downloadChart_summary() {
+            const canvas = document.getElementById('myChart');
+            const link = document.createElement('a');
+            const dataURL = canvas.toDataURL('image/png'); // Получаем Data URL графика
+            const resultContainer_summary = document.getElementById('resultChartContainer_summary');
+            const img = document.createElement('img');
+            img.src = dataURL;
+            img.style.maxWidth = '100%';
+            resultContainer_summary.innerHTML = ''; 
+            resultContainer_summary.appendChild(img); 
 
-    }
+        }
 
     document.getElementById('downloadBtn_refernce').addEventListener('click', downloadChart_reference);
     document.getElementById('downloadBtn_sample').addEventListener('click', downloadChart_sample);
     document.getElementById('downloadBtn_summary').addEventListener('click', downloadChart_summary);
 
-
+    
 
     document.querySelectorAll('.last100').forEach(button => {
         button.addEventListener('click', function() {
@@ -3274,29 +3375,26 @@
         });
     });
 
-
-
-
     function saveAsPDF() {
-        // Get the contents of the items to be saved as a PDF
+        // Получаем содержимое элементов, которые нужно сохранить как PDF
         var elementToPrint_1 = document.getElementById('end-file-1').outerHTML;
         var elementToPrint_2 = document.getElementById('end-file-2').outerHTML;
         var elementToPrint_3 = document.getElementById('end-file-3').outerHTML;
         
-        //  Combine the contents of all three elements
+        // Объединяем содержимое всех трех элементов
         var combinedContent = elementToPrint_1 + elementToPrint_2 + elementToPrint_3;
-        // Create a new window
+        // Создаем новое окно
         var printWindow = window.open('', '', 'width=800,height=600');
         
-        // Copy all styles from the main document
+        // Копируем все стили из основного документа
         var styles = '';
         Array.from(document.styleSheets).forEach(styleSheet => {
             try {
-                // If it is a CSS file (<link>), add it via <link> to the new window
+                // Если это CSS-файл (<link>), добавляем его через <link> в новое окно
                 if (styleSheet.href) {
                     styles += `<link rel="stylesheet" href="${styleSheet.href}">`;
                 } else {
-                    // If it is a built-in style (<style>), copy its contents
+                    // Если это встроенный стиль (<style>), копируем его содержимое
                     Array.from(styleSheet.cssRules).forEach(rule => {
                         styles += `<style>${rule.cssText}</style>`;
                     });
@@ -3307,15 +3405,15 @@
         });
 
         function updateCheckboxHTML(element) {
-        // Find all checkboxes in the element
+        // Находим все чекбоксы в элементе
             var checkboxes = element.querySelectorAll('input[type="checkbox"]');
             
-            // Update the HTML by adding a checked attribute if the checkbox is checked
+            // Обновляем HTML, добавляя атрибут checked, если чекбокс отмечен
             checkboxes.forEach(function(checkbox) {
                 if (checkbox.checked) {
-                    checkbox.setAttribute('checked', 'checked');  // Add checked attribute to HTML
+                    checkbox.setAttribute('checked', 'checked');  // Добавляем атрибут checked в HTML
                 } else {
-                    checkbox.removeAttribute('checked'); // Remove the attribute if the checkbox is unchecked
+                    checkbox.removeAttribute('checked'); // Убираем атрибут, если чекбокс не отмечен
                 }
             });
         }
@@ -3337,32 +3435,32 @@
 
 
         
-        //  Add printable content to a new window
+        // Добавляем содержимое для печати в новое окно
         printWindow.document.write('<html><head><title>Print</title>');
         printWindow.document.write(styles);  // Вставляем стили
         printWindow.document.write('</head><body>');
         printWindow.document.write(combinedContent);
         printWindow.document.write('</body></html>');
         
-        // Wait until the content is loaded, then call the print function
+        // Ждем, пока содержимое загрузится, затем вызываем функцию печати
         printWindow.document.close();
         printWindow.focus();
         printWindow.print();
         
-    // Close the window after printing (this may not work automatically in Safari)
+        // Закрываем окно после печати (в Safari это может не сработать автоматически)
     }
     document.getElementById('saveButton').addEventListener('click', function() {
-    // Creating an image in PNG format
+    // Создание изображения в формате PNG
         const link = document.createElement('a');
         link.href = myChart.toBase64Image();
         link.download = 'my_chart.png';  // Имя файла для скачивания
         link.click();
     });
 
-    // Initialize handlers for all tabs
+    // Инициализируем обработчики для всех вкладок
     [1, 2, 3, 4].forEach(setupControls);
 
-    // Show the first tab by default
+    // Показываем первую вкладку по умолчанию
     showTab(1);
 
 
