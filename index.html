@@ -153,6 +153,120 @@
                 height: 50px;
                 width: 66px;
         }
+        .button-add-grey-crit {
+            background-color: grey;
+            cursor: not-allowed;
+        }
+        .button-add-green {
+            cursor: pointer;
+            padding: 10px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #8d8989;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            font-family: Helvetica, sans-serif;
+            font-size: 16px;
+            height: auto;
+            width: 80%;
+            display: flex; /* Добавлено */
+            justify-content: flex-start; /* Выравнивание по горизонтали влево */
+            align-items: center; /* Вертикальное выравнивание */
+            text-align: left; /* Текст по левому краю */
+            background-color: rgb(61, 108, 151);
+            cursor: pointer;
+            color: white;
+        }
+
+        .button-add-criterium {
+            cursor: pointer;
+            padding: 10px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #8d8989;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            font-family: Helvetica, sans-serif;
+            font-size: 16px;
+            font-cpöp;
+            height: auto;
+            width: 80%;
+            display: flex; /* Добавлено */
+            justify-content: flex-start; /* Выравнивание по горизонтали влево */
+            align-items: center; /* Вертикальное выравнивание */
+            text-align: left; /* Текст по левому краю */
+            background-color: white;
+            cursor: pointer;
+
+        }
+
+        .button-add-criterium-info {
+            display: flex; /* Гибкое поведение для вертикального выравнивания */
+            flex-direction: column; /* Вертикальное расположение внутренних элементов */
+            margin-top: 10px;
+            margin-left: 20px;
+            height: auto;
+        }
+
+        .button-add-criterium-data {
+            display: flex; /* Гибкое поведение для вертикального выравнивания */
+            flex-direction: column; /* Вертикальное расположение внутренних элементов */
+            margin-top: 10px;
+            margin-left: 20px;
+            height: auto;
+        }
+
+        .button-add-criterium-info-small {
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 0px solid #000000;
+            border-radius: 5px;
+            font-family: Helvetica, sans-serif;
+            font-size: 16px;
+            width: 100%;
+            height: auto;
+            align-items: center; /* Вертикальное выравнивание */
+            display: flex; /* Гибкое выравнивание для маленьких кнопок */
+
+        }
+
+        .button-add-criterium-info-small-data {
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 2px solid #000000;
+            border-radius: 5px;
+            font-family: Helvetica, sans-serif;
+            font-size: 16px;
+            width: 100%;
+            height: auto;
+            align-items: center; /* Вертикальное выравнивание */
+            display: flex; /* Гибкое выравнивание для маленьких кнопок */
+
+        }
+
+        .button-add-criterium-info-name {
+            border: 0px solid #000000;
+            border-radius: 5px;
+            font-family: Helvetica, sans-serif;
+            font-size: 16px;
+            width: 100px;
+            height: 10px;
+            align-items: center; /* Вертикальное выравнивание */
+            display: flex; /* Гибкое выравнивание для маленьких кнопок */
+
+        }
+
+        .info-buttons {
+            display: flex;
+            flex-direction: column; /* Размещение элементов в столбик */
+            font-size: 19px; /* Размер шрифта заголовка */
+            font-weight: bold; /* Полужирный текст */
+            margin: 0px; /* Отступ между заголовком и кнопками */
+            color: #333; /* Цвет заголовка */
+        }
+
+
+
         .sendToComparison {
                 cursor: pointer;
                 padding: 5px;
@@ -320,6 +434,31 @@
             height: auto;
             overflow: auto;
         }
+        #parentContainer {
+            position: relative;
+            display: flex; /* Для расположения контейнеров по горизонтали */
+            width: 1390px; /* Ширина контейнера на всю ширину родителя */
+            height: 500px; /* Начальная высота контейнера */
+            margin-top: 20px;
+            margin-left: 5px;
+            font-family: 'Helvetica', sans-serif; /* Используем шрифт Helvetica */
+            border: 0px solid #ca4e4e; /* Линия вокруг контейнера для визуализации */
+            overflow: auto; /* Скрытие содержимого, выходящего за пределы контейнера */
+            box-sizing: border-box; /* Учитывать границы и отступы при расчете размеров */
+        }
+
+        #criteriumContainer {
+            position: relative;
+            width: 35%; /* Ширина контейнера на всю ширину родителя */
+            height: 460px; /* Начальная высота контейнера */
+            margin-top: 20px;
+            margin-left: 20px;
+            font-family: 'Helvetica', sans-serif; /* Используем шрифт Helvetica */
+            border: 0px solid #0e0a0a; /* Линия вокруг контейнера для визуализации */
+            overflow: auto; /* Скрытие содержимого, выходящего за пределы контейнера */
+            box-sizing: border-box; /* Учитывать границы и отступы при расчете размеров */
+        }
+        
         #chartContainer {
             position: relative;
             width: 60%; /* Ширина контейнера на всю ширину родителя */
@@ -1451,9 +1590,64 @@
                 <button id="addCalculatedHistogramsButton_Xenon" class="square-button-active" element="Xenon">Xe</button>
                 <input type="color" id="colorPicker_Xenon" value="#959296">
             </div>    
-        </div>    
-        <div id="chartContainer">
-            <canvas id="myChart"></canvas>
+        </div>   
+        <div id="parentContainer">
+            <div id="chartContainer">
+                <canvas id="myChart"></canvas>
+
+            </div>
+            <div id="criteriumContainer">
+                <div class="info-buttons" style="margin-right:10px;">
+                    <h4>Vacuum criteriums</h4> <!-- Исправленный закрывающий тег -->
+                    <div class="button-add-criterium" id = "use_criterium_reference">
+                        <div class="button-add-criterium-info-name" >Reference</div>
+                        <div class="button-add-criterium-info">
+                            <div class="button-add-criterium-info-small" >Water peak</div>
+                            <div class="button-add-criterium-info-small" >Final pressure</div>
+                            <div class="button-add-criterium-info-small" >Sum > 44</div>
+                            <div class="button-add-criterium-info-small" >Ratio</div>
+                        </div>
+                        <div class="button-add-criterium-data">
+                            <div class="button-add-criterium-info-small-data" id = "wp_ref">No data</div>
+                            <div class="button-add-criterium-info-small-data" id = "fp_ref">No data</div>
+                            <div class="button-add-criterium-info-small-data" id = "sum44_ref">No data</div>
+                            <div class="button-add-criterium-info-small-data"id = "rat_ref">No data</div>
+                        </div>
+                    </div>
+
+                    <div class="button-add-criterium"  id = "use_criterium_sample">
+                        <div class="button-add-criterium-info-name">Sample</div>
+                        <div class="button-add-criterium-info">
+                            <div class="button-add-criterium-info-small">Water peak</div>
+                            <div class="button-add-criterium-info-small" >Final pressure</div>
+                            <div class="button-add-criterium-info-small" >Sum > 44</div>
+                            <div class="button-add-criterium-info-small" >Ratio</div>
+                        </div>
+                        <div class="button-add-criterium-data">
+                            <div class="button-add-criterium-info-small-data"  id = "wp_samp">No data</div>
+                            <div class="button-add-criterium-info-small-data" id = "fp_samp">No data</div>
+                            <div class="button-add-criterium-info-small-data"id = "sum44_samp" >No data</div>
+                            <div class="button-add-criterium-info-small-data"id = "rat_samp" >No data</div>
+                        </div>
+                    </div>
+
+                    <div class="button-add-criterium" id = "use_criterium_comparison">
+                        <div class="button-add-criterium-info-name">Comparison</div>
+                        <div class="button-add-criterium-info">
+                            <div class="button-add-criterium-info-small" >Water peak</div>
+                            <div class="button-add-criterium-info-small">Final pressure</div>
+                            <div class="button-add-criterium-info-small">Sum > 44</div>
+                            <div class="button-add-criterium-info-small">Ratio</div>
+                        </div>
+                        <div class="button-add-criterium-data">
+                            <div class="button-add-criterium-info-small-data" id = "wp_comp">No data</div>
+                            <div class="button-add-criterium-info-small-data" id = "fp_comp">No data</div>
+                            <div class="button-add-criterium-info-small-data" id = "sum44_comp">No data</div>
+                            <div class="button-add-criterium-info-small-data" id = "rat_comp">No data</div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
         </div>
     </div>
 
@@ -2515,6 +2709,7 @@
                     }
                 }
             });
+            
             document.getElementById('clearHistograms').addEventListener('click', function() {
                 // Очищаем данные и обновляем график
 
@@ -3023,8 +3218,86 @@
             }
         });
 
-        
 
+        function toggleButtons(activeButtonId, vacuumButtonId) {
+            // Список всех кнопок "use_criterium"
+            console.log("ldd:",datasets)
+            datasets = Object.keys(datasets)
+            .filter(key => !key.includes("Vacuum Crit."))
+            .reduce((acc, key) => {
+                acc[key] = datasets[key];
+                return acc;
+            }, {});
+            updateChart()
+            const useButtons = [
+                { id: 'use_criterium_comparison', vacuumId: 'vacuum_test_comparison' },
+                { id: 'use_criterium_reference', vacuumId: 'vacuum_test_reference' },
+                { id: 'use_criterium_sample', vacuumId: 'vacuum_test_sample' }
+            ];
+
+            let isActive = false; // Флаг, чтобы проверить, была ли кнопка активной
+            
+            // Перебираем все кнопки
+            useButtons.forEach(button => {
+                const useButton = document.getElementById(button.id);
+                const vacuumButton = document.getElementById(button.vacuumId);
+
+                if (button.id === activeButtonId) {
+                    // Если это активная кнопка, проверим, была ли она уже активной
+                    if (useButton.classList.contains('button-add-green')) {
+                        // Если была активной, сбрасываем состояние
+                        useButton.classList.remove('button-add-green');
+                        useButton.classList.add('button-add-criterium');
+                        vacuumButton.classList.add('button-add-grey');
+                        vacuumButton.classList.remove('button-add-green');
+                        isActive = true; // Устанавливаем флаг, чтобы больше не изменять состояние
+                    } else {
+                        // Если кнопка не была активной, делаем ее зеленой
+                        useButton.classList.add('button-add-green');
+                        useButton.classList.remove('button-add-criterium');
+                        vacuumButton.click();
+                        // Имитация нажатия соответствующей кнопки vacuum_test
+                    }
+                } else {
+                    // Если это не активная кнопка, делаем ее серой
+                    useButton.classList.remove('button-add-green');
+                    useButton.classList.add('button-add-criterium');
+                    // Делаем кнопки vacuum_test неактивными
+                    vacuumButton.classList.add('button-add-grey');
+                    vacuumButton.classList.remove('button-add-green');
+                }
+            });
+
+            return isActive; // Возвращаем флаг, чтобы использовать его для дальнейших действий
+        }
+
+        // Обработчики событий для кнопок "use_criterium"
+        document.getElementById('use_criterium_comparison').addEventListener('click', function() {
+            const isActive = toggleButtons('use_criterium_comparison', 'vacuum_test_comparison');
+            if (!isActive) {
+                console.log('Vacuum Criterium Comparison activated');
+            } else {
+                console.log('Vacuum Criterium Comparison deactivated');
+            }
+        });
+
+        document.getElementById('use_criterium_reference').addEventListener('click', function() {
+            const isActive = toggleButtons('use_criterium_reference', 'vacuum_test_reference');
+            if (!isActive) {
+                console.log('Vacuum Criterium Reference activated');
+            } else {
+                console.log('Vacuum Criterium Reference deactivated');
+            }
+        });
+
+        document.getElementById('use_criterium_sample').addEventListener('click', function() {
+            const isActive = toggleButtons('use_criterium_sample', 'vacuum_test_sample');
+            if (!isActive) {
+                console.log('Vacuum Criterium Sample activated');
+            } else {
+                console.log('Vacuum Criterium Sample deactivated');
+            }
+        });
 
         document.getElementById('yMin').addEventListener('input', function () {
             yMin = parseFloat(this.value);
@@ -3149,7 +3422,12 @@
 
 
         const summaryHeaderRow_sum = document.createElement('tr');
-        comparisonTable_sum.innerHTML = '<th>Sum</th><th>Sum>44</th><th>Ratio</th>';
+        const headers = ['Sum', 'Sum>44', 'Ratio'];
+        headers.forEach(header => {
+            const th = document.createElement('th');
+            th.textContent = header;
+            summaryHeaderRow_sum.appendChild(th);
+        });
         comparisonTable_sum.appendChild(summaryHeaderRow_sum);
 
         const summaryHeaderRow_dat = document.createElement('tr');
@@ -3190,6 +3468,7 @@
 
             comparisonTable_sum.appendChild(newRow);
         }
+        comparisonTable_dat.appendChild(summaryHeaderRow_dat);
     
         for (let i = 1; i < refRows_dat.length; i++) { // начинаем с 1, чтобы пропустить заголовок
             const refRow = refRows_dat[i];
@@ -3210,9 +3489,10 @@
                 newRow.appendChild(newCell);
             }
 
-        comparisonTable_dat.appendChild(summaryHeaderRow_dat);
+        
         comparisonTable_dat.appendChild(newRow);
         }
+        
     
     }
 
@@ -3225,45 +3505,110 @@
         const comparisonTable_sum = document.getElementById('summaryTable7');
         const comparisonTable_dat = document.getElementById('dataTable7');
         calculateDifference(referenceTable_sum, dataTable_sum,referenceTable_dat, dataTable_dat)
+        return 1
     
     }
 
 // Устанавливаем обработчик событий для кнопок "Send to comparison"
     document.querySelectorAll('.sendToComparison').forEach(button => {
-        button.addEventListener('click', function() {
-            const tabNumber = this.getAttribute('data-tab'); // Получаем номер вкладки
-            const refNumber = this.getAttribute('data-ref'); // Получаем номер ссылки
+        button.addEventListener('click', function () {
+            const tabNumber = this.getAttribute('data-tab');
+            const refNumber = this.getAttribute('data-ref');
             const summaryTableId = 'summaryTable' + tabNumber;
             const dataTableId = 'dataTable' + tabNumber;
 
-        
+
             take_the_avarage(summaryTableId, dataTableId, tabNumber, refNumber);
-            updateComparisonTable(tabNumber, refNumber);
-            if (tabNumber==="3" || tabNumber==="4" ) {
-                var table = document.getElementById('summaryTable6');
-                var data_table = document.getElementById('dataTable6');
-                var total = table.rows[1].cells[0].innerText;
-                var total_44 = table.rows[1].cells[1].innerText;
-                var total_ratio = table.rows[1].cells[2].innerText;
-                var water_peak = data_table.rows[1].cells[18].innerText
-                document.getElementById('sum_of_all_scan').innerText = total;
-                document.getElementById('sum_of_44').innerText = total_44;
-                document.getElementById('contribution_of_44').innerText = total_ratio;
-                document.getElementById('water-peak').innerText = water_peak;
+
+            if (tabNumber === "3" || tabNumber === "4") {
+                const table = document.getElementById('summaryTable6');
+                const data_table = document.getElementById('dataTable6');
+
+                if (table && data_table) {
+                    const total = table.rows[1].cells[0].innerText;
+                    const total_44 = table.rows[1].cells[1].innerText;
+                    const total_ratio = table.rows[1].cells[2].innerText;
+                    const water_peak = data_table.rows[1].cells[18].innerText;
+
+                    document.getElementById('sum_of_all_scan').innerText = total;
+                    document.getElementById('sum_of_44').innerText = total_44;
+                    document.getElementById('contribution_of_44').innerText = total_ratio;
+                    document.getElementById('water-peak').innerText = water_peak;
+
+                    document.getElementById('wp_samp').innerText = water_peak;
+                    document.getElementById('fp_samp').innerText = total;
+                    document.getElementById('sum44_samp').innerText = total_44;
+                    document.getElementById('rat_samp').innerText = total_ratio;
+                } else {
+                    console.error("Table or Data Table for Tab 6 not found.");
+                }
             }
-            if (tabNumber==="1" || tabNumber==="2" ) {
-                var table = document.getElementById('summaryTable5');
-                var valueToInsert = table.rows[1].cells[0].innerText;
-                document.getElementById('sum_of_all_scan_ref').innerText = valueToInsert;
+
+            if (tabNumber === "1" || tabNumber === "2") {
+                const table = document.getElementById('summaryTable5');
+                const data_table = document.getElementById('dataTable5');
+
+                if (table && data_table) {
+                    const total = table.rows[1].cells[0].innerText;
+                    const total_44 = table.rows[1].cells[1].innerText;
+                    const total_ratio = table.rows[1].cells[2].innerText;
+                    const water_peak = data_table.rows[1].cells[18].innerText;
+
+                    document.getElementById('sum_of_all_scan').innerText = total;
+                    document.getElementById('wp_ref').innerText = water_peak;
+                    document.getElementById('fp_ref').innerText = total;
+                    document.getElementById('sum44_ref').innerText = total_44;
+                    document.getElementById('rat_ref').innerText = total_ratio;
+                } else {
+                    console.error("Table or Data Table for Tab 5 not found.");
+                }
             }
-            var today = new Date();
-            var formattedDate = today.getDate().toString().padStart(2, '0') + '.' + 
-                    (today.getMonth() + 1).toString().padStart(2, '0') + '.' + 
-                    today.getFullYear();
+
+            const today = new Date();
+            const formattedDate = today.getDate().toString().padStart(2, '0') + '.' +
+                (today.getMonth() + 1).toString().padStart(2, '0') + '.' +
+                today.getFullYear();
+
             document.getElementById('data-final-1').innerText = formattedDate;
             document.getElementById('data-final-2').innerText = formattedDate;
             document.getElementById('data-final-3').innerText = formattedDate;
             document.getElementById('data-final-4').innerText = formattedDate;
+
+            const p = updateComparisonTable(tabNumber, refNumber);
+            console.log("Result of updateComparisonTable:", p);
+
+            if (p === 1) {
+                const table = document.getElementById('summaryTable7');
+                const data_table = document.getElementById('dataTable7');
+
+                if (table && data_table) {
+                    console.log("Found tables for comparison update.");
+
+                    if (table && table.rows[1] && table.rows[1].cells[0]) {
+                    const total = table.rows[1].cells[0].innerText;
+                    console.log("Total:", total);
+                } else {
+                    console.error("Ошибка: строки или ячейки в таблице отсутствуют.");
+                    console.log("Таблица:", table);
+                    console.log("Строка 1:", table ? table.rows[1] : "нет строки");
+                    console.log("Ячейка 0:", table && table.rows[1] ? table.rows[1].cells[0] : "нет ячейки");
+                }
+                const row = table.rows[1];
+                console.log("Содержимое строки 1:", row.innerHTML);
+
+                    const total = table.rows[1].cells[0].innerText;
+                    const total_44 = table.rows[1].cells[1].innerText;
+                    const total_ratio = table.rows[1].cells[2].innerText;
+                    const water_peak = data_table.rows[1].cells[18].innerText;
+
+                    document.getElementById('wp_comp').innerText = water_peak;
+                    document.getElementById('fp_comp').innerText = total;
+                    document.getElementById('sum44_comp').innerText = total_44;
+                    document.getElementById('rat_comp').innerText = total_ratio;
+                } else {
+                    console.error("Table or Data Table for Comparison not found.");
+                }
+            }
         });
     });
 
@@ -3300,7 +3645,7 @@
             }
         });
     }
-    
+
     function downloadChart_sample() {
             const canvas = document.getElementById('myChart');
             const link = document.createElement('a');
