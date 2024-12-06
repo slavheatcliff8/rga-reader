@@ -3552,8 +3552,8 @@
                     const water_peak = data_table.rows[1].cells[18].innerText;
 
                     document.getElementById('sum_of_all_scan').innerText = total;
-                    document.getElementById('final_pressure_sample').innerText = total;
-                    document.getElementById('final_pressure').innerText = total;
+                    document.getElementById('final_pressure_sample').innerText = total + "mbar";
+                    document.getElementById('final_pressure').innerText = total + "mbar";
                     document.getElementById('sum_of_44').innerText = total_44;
                     document.getElementById('contribution_of_44').innerText = total_ratio;
                     document.getElementById('water-peak').innerText = water_peak;
@@ -3578,7 +3578,7 @@
                     const water_peak = data_table.rows[1].cells[18].innerText;
 
                     document.getElementById('sum_of_all_scan').innerText = total;
-                    document.getElementById('final_pressure_reference').innerText = total;
+                    document.getElementById('final_pressure_reference').innerText = total + "mbar";
                     document.getElementById('wp_ref').innerText = water_peak;
                     document.getElementById('fp_ref').innerText = total;
                     document.getElementById('sum44_ref').innerText = total_44;
