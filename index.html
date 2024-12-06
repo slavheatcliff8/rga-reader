@@ -168,7 +168,7 @@
             font-family: Helvetica, sans-serif;
             font-size: 16px;
             height: auto;
-            width: 80%;
+            width: 90%;
             display: flex; /* Добавлено */
             justify-content: flex-start; /* Выравнивание по горизонтали влево */
             align-items: center; /* Вертикальное выравнивание */
@@ -176,6 +176,7 @@
             background-color: rgb(61, 108, 151);
             cursor: pointer;
             color: white;
+            overflow: auto;
         }
 
         .button-add-criterium {
@@ -188,15 +189,15 @@
             background-color: #f1f1f1;
             font-family: Helvetica, sans-serif;
             font-size: 16px;
-            font-cpöp;
             height: auto;
-            width: 80%;
+            width: 90%;
             display: flex; /* Добавлено */
             justify-content: flex-start; /* Выравнивание по горизонтали влево */
             align-items: center; /* Вертикальное выравнивание */
             text-align: left; /* Текст по левому краю */
             background-color: white;
             cursor: pointer;
+            overflow: auto;
 
         }
 
@@ -268,17 +269,17 @@
 
 
         .sendToComparison {
-                cursor: pointer;
-                padding: 5px;
-                margin-right: 5px;
-                border: 1px solid #ddd;
-                border-radius: 5px;
-                background-color: #f1f1f1;
-                font-family: Helvetica, Helvetica;
-                font-size: 12px;
-                height: 30px;
-                width: 150px;
-        }
+            cursor: pointer;
+            padding: 5px;
+            margin-right: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            font-family: Helvetica, Helvetica;
+            font-size: 12px;
+            height: 30px;
+            width: 150px;
+    }
         .sendToComparison:active {
             transform: scale(0.95); /* Уменьшение кнопки при нажатии */
             background-color: #d1d1d1; /* Изменение цвета фона при нажатии */
@@ -1602,9 +1603,9 @@
                     <div class="button-add-criterium" id = "use_criterium_reference">
                         <div class="button-add-criterium-info-name" >Reference</div>
                         <div class="button-add-criterium-info">
-                            <div class="button-add-criterium-info-small" >Water peak</div>
-                            <div class="button-add-criterium-info-small" >Final pressure</div>
-                            <div class="button-add-criterium-info-small" >Sum > 44</div>
+                            <div class="button-add-criterium-info-small" >Water peak (mbar)</div>
+                            <div class="button-add-criterium-info-small" >Final pressure (mbar)</div>
+                            <div class="button-add-criterium-info-small" >Sum > 44 (mbar)</div>
                             <div class="button-add-criterium-info-small" >Ratio</div>
                         </div>
                         <div class="button-add-criterium-data">
@@ -1618,9 +1619,9 @@
                     <div class="button-add-criterium"  id = "use_criterium_sample">
                         <div class="button-add-criterium-info-name">Sample</div>
                         <div class="button-add-criterium-info">
-                            <div class="button-add-criterium-info-small">Water peak</div>
-                            <div class="button-add-criterium-info-small" >Final pressure</div>
-                            <div class="button-add-criterium-info-small" >Sum > 44</div>
+                            <div class="button-add-criterium-info-small">Water peak (mbar)</div>
+                            <div class="button-add-criterium-info-small" >Final pressure (mbar)</div>
+                            <div class="button-add-criterium-info-small" >Sum > 44 (mbar)</div>
                             <div class="button-add-criterium-info-small" >Ratio</div>
                         </div>
                         <div class="button-add-criterium-data">
@@ -1634,9 +1635,9 @@
                     <div class="button-add-criterium" id = "use_criterium_comparison">
                         <div class="button-add-criterium-info-name">Comparison</div>
                         <div class="button-add-criterium-info">
-                            <div class="button-add-criterium-info-small" >Water peak</div>
-                            <div class="button-add-criterium-info-small">Final pressure</div>
-                            <div class="button-add-criterium-info-small">Sum > 44</div>
+                            <div class="button-add-criterium-info-small" >Water peak (mbar)</div>
+                            <div class="button-add-criterium-info-small">Final pressure (mbar)</div>
+                            <div class="button-add-criterium-info-small">Sum > 44 (mbar)</div>
                             <div class="button-add-criterium-info-small">Ratio</div>
                         </div>
                         <div class="button-add-criterium-data">
@@ -1818,7 +1819,7 @@
                         <div class="pdf-2-text-data" contenteditable="false">Date:</div>
                         <div class="pdf-2-name-data" contenteditable="true" id="data-final-1"></div>
                         <div class="pdf-2-text-pressure" contenteditable="false">Final pressure:</div>
-                        <div class="pdf-2-name-pressure" contenteditable="true" id=""></div>
+                        <div class="pdf-2-name-pressure" contenteditable="true" id="final_pressure_reference"></div>
                     </div>
                 </div>
                 <div class="pdf-info">
@@ -1841,7 +1842,7 @@
                         <div class="pdf-2-text-data" contenteditable="false">Date:</div>
                         <div class="pdf-2-name-data" contenteditable="true" id="data-final-2"></div>
                         <div class="pdf-2-text-pressure" contenteditable="false">Final pressure:</div>
-                        <div class="pdf-2-name-pressure" contenteditable="true" id=""></div>
+                        <div class="pdf-2-name-pressure" contenteditable="true" id="final_pressure_sample"></div>
                     </div>
                 </div>
                 <!-- Здесь можно добавить содержимое для второго контейнера -->
@@ -1875,21 +1876,21 @@
                 <div class="pdf-info">
                     <div class="pdf-text-name" contenteditable="false"></div>
                     <div class="pdf-summary-big" contenteditable="false">
-                        <div class="pdf-summary-name" contenteditable="false">Water peak:</div>
+                        <div class="pdf-summary-name" contenteditable="false">Water peak (mbar):</div>
                         <div class="pdf-summary-date" contenteditable="true" id="water-peak"></div>
                     </div>
                 </div>
                 <div class="pdf-info">
                     <div class="pdf-text-name" contenteditable="false"></div>
                     <div class="pdf-summary-big" contenteditable="false">
-                        <div class="pdf-summary-name" contenteditable="false">All masses < 45 are below 1/100 of water:</div>
+                        <div class="pdf-summary-name" contenteditable="false">All masses < 45 are below 1/100 of water (mbar):</div>
                         <div class="pdf-summary-date" contenteditable="true" id="water_1">yes</div>
                     </div>
                 </div>
                 <div class="pdf-info">
                     <div class="pdf-text-name" contenteditable="false"></div>
                     <div class="pdf-summary-big" contenteditable="false">
-                        <div class="pdf-summary-name" contenteditable="false">All other masses are below 1/1000 of water</div>
+                        <div class="pdf-summary-name" contenteditable="false">All other masses are below 1/1000 of water (mbar)</div>
                         <div class="pdf-summary-date" contenteditable="true" id="water_2">yes</div>
                     </div>
                 </div>
@@ -1898,14 +1899,14 @@
                 <div class="pdf-info">
                     <div class="pdf-text-name" contenteditable="false"></div>
                     <div class="pdf-summary-big" contenteditable="false">
-                        <div class="pdf-summary-name" contenteditable="false">Sum of all scanned masses:</div>
+                        <div class="pdf-summary-name" contenteditable="false">Sum of all scanned masses (mbar):</div>
                         <div class="pdf-summary-date" contenteditable="true" id = "sum_of_all_scan"></div>
                     </div>
                 </div>
                 <div class="pdf-info">
                     <div class="pdf-text-name" contenteditable="false"></div>
                     <div class="pdf-summary-big" contenteditable="false">
-                        <div class="pdf-summary-name" contenteditable="false">Sum of masses > 44:</div>
+                        <div class="pdf-summary-name" contenteditable="false">Sum of masses > 44 (mbar):</div>
                         <div class="pdf-summary-date" contenteditable="true" id = "sum_of_44"></div>
                     </div>
                 </div>
@@ -3218,6 +3219,21 @@
             }
         });
 
+        function add_criterium(source) {
+
+            const water_peak= document.getElementById('wp_'+ source).textContent;
+            const total = document.getElementById('fp_'+ source).textContent 
+            const total_44 = document.getElementById('sum44_'+ source).textContent ;
+            const total_ratio = document.getElementById('rat_'+ source).textContent;
+            
+
+            document.getElementById('sum_of_all_scan').innerText = total;
+            document.getElementById('sum_of_44').innerText = total_44;
+            document.getElementById('contribution_of_44').innerText = total_ratio;
+            document.getElementById('water-peak').innerText = water_peak;
+
+        }
+
 
         function toggleButtons(activeButtonId, vacuumButtonId) {
             // Список всех кнопок "use_criterium"
@@ -3274,6 +3290,9 @@
         // Обработчики событий для кнопок "use_criterium"
         document.getElementById('use_criterium_comparison').addEventListener('click', function() {
             const isActive = toggleButtons('use_criterium_comparison', 'vacuum_test_comparison');
+            add_criterium("comp")
+            
+
             if (!isActive) {
                 console.log('Vacuum Criterium Comparison activated');
             } else {
@@ -3283,6 +3302,7 @@
 
         document.getElementById('use_criterium_reference').addEventListener('click', function() {
             const isActive = toggleButtons('use_criterium_reference', 'vacuum_test_reference');
+            add_criterium("ref")
             if (!isActive) {
                 console.log('Vacuum Criterium Reference activated');
             } else {
@@ -3292,6 +3312,7 @@
 
         document.getElementById('use_criterium_sample').addEventListener('click', function() {
             const isActive = toggleButtons('use_criterium_sample', 'vacuum_test_sample');
+            add_criterium("samp")
             if (!isActive) {
                 console.log('Vacuum Criterium Sample activated');
             } else {
@@ -3531,6 +3552,8 @@
                     const water_peak = data_table.rows[1].cells[18].innerText;
 
                     document.getElementById('sum_of_all_scan').innerText = total;
+                    document.getElementById('final_pressure_sample').innerText = total;
+                    document.getElementById('final_pressure').innerText = total;
                     document.getElementById('sum_of_44').innerText = total_44;
                     document.getElementById('contribution_of_44').innerText = total_ratio;
                     document.getElementById('water-peak').innerText = water_peak;
@@ -3555,6 +3578,7 @@
                     const water_peak = data_table.rows[1].cells[18].innerText;
 
                     document.getElementById('sum_of_all_scan').innerText = total;
+                    document.getElementById('final_pressure_reference').innerText = total;
                     document.getElementById('wp_ref').innerText = water_peak;
                     document.getElementById('fp_ref').innerText = total;
                     document.getElementById('sum44_ref').innerText = total_44;
