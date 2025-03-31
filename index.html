@@ -103,19 +103,19 @@
 
         .image-container h2 {
                 display: flex;
-                align-items: center; /* Вертикальное выравнивание по центру */
-                margin: 0; /* Убирает стандартные отступы заголовка */
+                align-items: center; 
+                margin: 0; 
         }
 
         .image-container img {
-                height: 70px; /* Устанавливаем высоту изображения */
-                margin-right: 10px; /* Отступ между изображением и текстом */
-                vertical-align: middle; /* Вертикальное выравнивание изображения по центру строки */
+                height: 70px; 
+                margin-right: 10px; 
+                vertical-align: middle; 
         }
 
         .image-container h2 span {
                 display: inline-flex;
-                align-items: center; /* Вертикальное выравнивание текста */
+                align-items: center; 
         }
 
         .tab-button {
@@ -169,15 +169,41 @@
             font-size: 16px;
             height: auto;
             width: 90%;
-            display: flex; /* Добавлено */
-            justify-content: flex-start; /* Выравнивание по горизонтали влево */
-            align-items: center; /* Вертикальное выравнивание */
-            text-align: left; /* Текст по левому краю */
+            display: flex;
+            justify-content: flex-start; 
+            align-items: center; 
+            text-align: left; 
             background-color: rgb(61, 108, 151);
             cursor: pointer;
             color: white;
             overflow: auto;
         }
+
+        .peaks_info {
+            cursor: pointer;
+            padding: 10px;
+            margin-top: 10px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border: 0px solid #8d8989;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+            font-family: Helvetica, sans-serif;
+            font-size: 16px;
+            height: auto;
+            width: 95%;
+            display: flex; 
+            justify-content: flex-start; 
+            text-align: left; 
+            background-color: white;
+            cursor: pointer;
+            overflow: auto;
+            display: flex;
+            flex-direction: column; 
+            align-items: left; 
+
+        }
+
 
         .button-add-criterium {
             cursor: pointer;
@@ -190,11 +216,11 @@
             font-family: Helvetica, sans-serif;
             font-size: 16px;
             height: auto;
-            width: 90%;
-            display: flex; /* Добавлено */
-            justify-content: flex-start; /* Выравнивание по горизонтали влево */
-            align-items: center; /* Вертикальное выравнивание */
-            text-align: left; /* Текст по левому краю */
+            width: 450px;
+            display: flex; 
+            justify-content: flex-start; 
+            align-items: center; 
+            text-align: left; 
             background-color: white;
             cursor: pointer;
             overflow: auto;
@@ -202,16 +228,16 @@
         }
 
         .button-add-criterium-info {
-            display: flex; /* Гибкое поведение для вертикального выравнивания */
-            flex-direction: column; /* Вертикальное расположение внутренних элементов */
+            display: flex;
+            flex-direction: column; 
             margin-top: 10px;
             margin-left: 20px;
             height: auto;
         }
 
         .button-add-criterium-data {
-            display: flex; /* Гибкое поведение для вертикального выравнивания */
-            flex-direction: column; /* Вертикальное расположение внутренних элементов */
+            display: flex; 
+            flex-direction: column; 
             margin-top: 10px;
             margin-left: 20px;
             height: auto;
@@ -226,8 +252,8 @@
             font-size: 16px;
             width: 100%;
             height: auto;
-            align-items: center; /* Вертикальное выравнивание */
-            display: flex; /* Гибкое выравнивание для маленьких кнопок */
+            align-items: center; 
+            display: flex;
 
         }
 
@@ -240,8 +266,8 @@
             font-size: 16px;
             width: 100%;
             height: auto;
-            align-items: center; /* Вертикальное выравнивание */
-            display: flex; /* Гибкое выравнивание для маленьких кнопок */
+            align-items: center;
+            display: flex; 
 
         }
 
@@ -252,18 +278,19 @@
             font-size: 16px;
             width: 100px;
             height: 10px;
-            align-items: center; /* Вертикальное выравнивание */
-            display: flex; /* Гибкое выравнивание для маленьких кнопок */
+            align-items: center;
+            display: flex; 
 
         }
 
         .info-buttons {
             display: flex;
-            flex-direction: column; /* Размещение элементов в столбик */
-            font-size: 19px; /* Размер шрифта заголовка */
-            font-weight: bold; /* Полужирный текст */
-            margin: 0px; /* Отступ между заголовком и кнопками */
-            color: #333; /* Цвет заголовка */
+            flex-direction: column; 
+            font-size: 19px; 
+            font-weight: bold;
+            margin: 0px; 
+            width: 500px;
+            color: #333; 
         }
 
 
@@ -281,8 +308,8 @@
             width: 150px;
     }
         .sendToComparison:active {
-            transform: scale(0.95); /* Уменьшение кнопки при нажатии */
-            background-color: #d1d1d1; /* Изменение цвета фона при нажатии */
+            transform: scale(0.95);
+            background-color: #d1d1d1; 
         }
 
         .button-add-reference {
@@ -321,22 +348,22 @@
         }
 
         .table-container {
-                display: flex; /* Flexbox для размещения таблиц в ряд */
+                display: flex; 
                 justify-content: flex-start;
                 width: 95%;
                 border: 0px solid #ddd;
                 max-height: 600px; 
                 margin: 20px auto;
                 padding: 10px;
-                overflow-x: auto; /* Добавляет горизонтальную прокрутку */
-                overflow-y: auto!important; /* Добавляет вертикальную прокрутку */
+                overflow-x: auto;
+                overflow-y: auto!important; 
         }
         #menu-2 {
-                display: flex; /* Flexbox для размещения таблиц в ряд */
+                display: flex;
                 justify-content: flex-start;
                 width: 95%;
                 height: 500px;
-                overflow: auto; /* Добавляет прокрутку */
+                overflow: auto;
                 border: 0px solid #ddd;
                 margin: 20px auto;
                 margin-top: 50px;
@@ -344,11 +371,11 @@
         }
 
         .table-container-comp {
-                display: flex; /* Flexbox для размещения таблиц в ряд */
+                display: flex; 
                 justify-content: flex-start;
                 width: 95%;
                 height: 100px;
-                overflow: auto; /* Добавляет прокрутку */
+                overflow: auto; 
                 border: 0px solid #ddd;
                 margin: 20px auto;
                 padding: 10px;
@@ -448,14 +475,29 @@
             box-sizing: border-box; /* Учитывать границы и отступы при расчете размеров */
         }
 
-        #criteriumContainer {
+        #parentContainer_right {
             position: relative;
-            width: 35%; /* Ширина контейнера на всю ширину родителя */
+            display: flex; /* Для расположения контейнеров по горизонтали */
+            width: 200px!; /* Ширина контейнера на всю ширину родителя */
             height: 460px; /* Начальная высота контейнера */
             margin-top: 20px;
+            margin-left: 5px;
+            font-family: 'Helvetica', sans-serif; /* Используем шрифт Helvetica */
+            border: 0px solid #ca4e4e; /* Линия вокруг контейнера для визуализации */
+            overflow: auto; /* Скрытие содержимого, выходящего за пределы контейнера */
+            box-sizing: border-box; /* Учитывать границы и отступы при расчете размеров */
+            display: flex;
+            flex-direction: column;
+        }
+
+        .criteriumContainer {
+            position: relative;
+            width: 500px; /* Ширина контейнера на всю ширину родителя */
+            height: 240px; /* Начальная высота контейнера */
+            margin-top: 0px;
             margin-left: 20px;
             font-family: 'Helvetica', sans-serif; /* Используем шрифт Helvetica */
-            border: 0px solid #0e0a0a; /* Линия вокруг контейнера для визуализации */
+            border: -px solid #0e0a0a; /* Линия вокруг контейнера для визуализации */
             overflow: auto; /* Скрытие содержимого, выходящего за пределы контейнера */
             box-sizing: border-box; /* Учитывать границы и отступы при расчете размеров */
         }
@@ -518,6 +560,16 @@
             text-align: center; /* Выравнивание текста по центру */
             justify-content: center; /* Горизонтальное центрирование текста */
         }
+        input[type="peak"] {
+            width: 70px; /* Устанавливаем ширину для всех полей с типом number */
+            height: 30px; 
+            margin-left: 10px;
+            text-align: center; /* Выравнивание текста по центру */
+            justify-content: center; /* Горизонтальное центрирование текста */
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 30px;
+            font-family: 'Arial', rgba(15, 23, 72, 1);
+        }
         .pdf-table-container {
             display: flex; /* Для расположения контейнеров по горизонтали */
             flex-direction: column; /* Размещаем контейнеры вертикально */
@@ -577,7 +629,7 @@
             height: 30px; /* Фиксированная высота */
             border: 0px solid rgba(15, 23, 72, 1);
             font-size: 15px;
-            font-family: 'Arial', rgba(15, 23, 72, 1);;
+            font-family: 'Arial', rgba(15, 23, 72, 1);
             box-sizing: border-box; /* Учитываем границы в размерах */
 
         }
@@ -1147,10 +1199,10 @@
         </div>
         <div class="table-container">
             <table id="summaryTable3" class="summary-table">
-                <!-- Содержимое таблицы summaryTable3 -->
+
             </table>
             <table id="dataTable3">
-                <!-- Содержимое таблицы dataTable3 -->
+
             </table>
         </div>
     </div>
@@ -1176,10 +1228,10 @@
         </div>
         <div class="table-container">
             <table id="summaryTable4" class="summary-table">
-                <!-- Содержимое таблицы summaryTable4 -->
+ 
             </table>
             <table id="dataTable4">
-                <!-- Содержимое таблицы dataTable4 -->
+
             </table>
         </div>
     </div>
@@ -1191,23 +1243,23 @@
         <div class="controls">
             <div class="table-container-comp">
                 <table id="summaryTable5" class="summary-table">
-                    <!-- Содержимое таблицы summaryTable5 -->
+
                 </table>
                 <table id="dataTable5">
-                    <!-- Содержимое таблицы dataTable5 -->
+
                 </table>
             </div>
         </div>
         <br><br>
-        <!-- Лейбл "Data average" -->
+
         <label><b>Data average</b></label>
         <div class="controls">
             <div class="table-container-comp">
                 <table id="summaryTable6" class="summary-table">
-                    <!-- Содержимое таблицы summaryTable6 -->
+
                 </table>
                 <table id="dataTable6">
-                    <!-- Содержимое таблицы dataTable6 -->
+
                 </table>
             </div>
         </div>
@@ -1215,10 +1267,10 @@
         <div class="controls">
             <div class="table-container-comp">
                 <table id="summaryTable7" class="summary-table">
-                    <!-- Содержимое таблицы summaryTable6 -->
+
                 </table>
                 <table id="dataTable7">
-                    <!-- Содержимое таблицы dataTable6 -->
+
                 </table>
             </div>
         </div>
@@ -1226,12 +1278,9 @@
     <div id="tab6" class="tab-content">
         <h3>Data Visualization</h3>
         
-        <!-- Контейнер для диаграммы -->
         <div id="menu-1">
             <div id="bar-line">
-                <!-- Левая часть: две строки кнопок -->
                 <div class="left-buttons" style = "margin-right:10px;">
-                    <!-- Первая группа кнопок -->
                     <h4>Reference: </h4>
                     <div class="button-group" >
                         <input type="color" id="colorPicker_reference_bar" style = "width: 15px; height: 50px; margin-right: 0px;" value="#4BC0C0">
@@ -1597,58 +1646,72 @@
                 <canvas id="myChart"></canvas>
 
             </div>
-            <div id="criteriumContainer">
-                <div class="info-buttons" style="margin-right:10px;">
-                    <h4>Vacuum criteriums</h4> <!-- Исправленный закрывающий тег -->
-                    <div class="button-add-criterium" id = "use_criterium_reference">
-                        <div class="button-add-criterium-info-name" >Reference</div>
-                        <div class="button-add-criterium-info">
-                            <div class="button-add-criterium-info-small" >Water peak (mbar)</div>
-                            <div class="button-add-criterium-info-small" >Sum all (mbar)</div>
-                            <div class="button-add-criterium-info-small" >Sum > 44 (mbar)</div>
-                            <div class="button-add-criterium-info-small" >Ratio</div>
-                        </div>
-                        <div class="button-add-criterium-data">
-                            <div class="button-add-criterium-info-small-data" id = "wp_ref">No data</div>
-                            <div class="button-add-criterium-info-small-data" id = "fp_ref">No data</div>
-                            <div class="button-add-criterium-info-small-data" id = "sum44_ref">No data</div>
-                            <div class="button-add-criterium-info-small-data"id = "rat_ref">No data</div>
+            <div class="parentContainer_right">
+                <div class="criteriumContainer">
+                    <div class="info-buttons" style="margin-right:10px;">
+                        <h4>Peaks Info</h4> 
+                        <input type="peak" id="Peak Number" step="1" value="0"></button>  
+                        <div class="peaks_info" id = "">  
+                              
                         </div>
                     </div>
+                </div> 
+                <div class="criteriumContainer">
+                    <div class="info-buttons" style="margin-right:10px;">
+                        <h4>Vacuum criteriums</h4>
+                        <div class="button-add-criterium" id = "use_criterium_reference">
+                            <div class="button-add-criterium-info-name" >Reference</div>
+                            <div class="button-add-criterium-info">
+                                <div class="button-add-criterium-info-small" >Water peak (mbar)</div>
+                                <div class="button-add-criterium-info-small" >Sum all (mbar)</div>
+                                <div class="button-add-criterium-info-small" >Sum > 44 (mbar)</div>
+                                <div class="button-add-criterium-info-small" >Ratio</div>
+                            </div>
+                            <div class="button-add-criterium-data">
+                                <div class="button-add-criterium-info-small-data" id = "wp_ref">No data</div>
+                                <div class="button-add-criterium-info-small-data" id = "fp_ref">No data</div>
+                                <div class="button-add-criterium-info-small-data" id = "sum44_ref">No data</div>
+                                <div class="button-add-criterium-info-small-data"id = "rat_ref">No data</div>
+                            </div>
+                        </div>
 
-                    <div class="button-add-criterium"  id = "use_criterium_sample">
-                        <div class="button-add-criterium-info-name">Sample</div>
-                        <div class="button-add-criterium-info">
-                            <div class="button-add-criterium-info-small">Water peak (mbar)</div>
-                            <div class="button-add-criterium-info-small" >Sum all (mbar)</div>
-                            <div class="button-add-criterium-info-small" >Sum > 44 (mbar)</div>
-                            <div class="button-add-criterium-info-small" >Ratio</div>
+                        <div class="button-add-criterium"  id = "use_criterium_sample">
+                            <div class="button-add-criterium-info-name">Sample</div>
+                            <div class="button-add-criterium-info">
+                                <div class="button-add-criterium-info-small">Water peak (mbar)</div>
+                                <div class="button-add-criterium-info-small" >Sum all (mbar)</div>
+                                <div class="button-add-criterium-info-small" >Sum > 44 (mbar)</div>
+                                <div class="button-add-criterium-info-small" >Ratio</div>
+                            </div>
+                            <div class="button-add-criterium-data">
+                                <div class="button-add-criterium-info-small-data"  id = "wp_samp">No data</div>
+                                <div class="button-add-criterium-info-small-data" id = "fp_samp">No data</div>
+                                <div class="button-add-criterium-info-small-data"id = "sum44_samp" >No data</div>
+                                <div class="button-add-criterium-info-small-data"id = "rat_samp" >No data</div>
+                            </div>
                         </div>
-                        <div class="button-add-criterium-data">
-                            <div class="button-add-criterium-info-small-data"  id = "wp_samp">No data</div>
-                            <div class="button-add-criterium-info-small-data" id = "fp_samp">No data</div>
-                            <div class="button-add-criterium-info-small-data"id = "sum44_samp" >No data</div>
-                            <div class="button-add-criterium-info-small-data"id = "rat_samp" >No data</div>
-                        </div>
-                    </div>
 
-                    <div class="button-add-criterium" id = "use_criterium_comparison">
-                        <div class="button-add-criterium-info-name">Comparison</div>
-                        <div class="button-add-criterium-info">
-                            <div class="button-add-criterium-info-small" >Water peak (mbar)</div>
-                            <div class="button-add-criterium-info-small">Sum all (mbar)</div>
-                            <div class="button-add-criterium-info-small">Sum > 44 (mbar)</div>
-                            <div class="button-add-criterium-info-small">Ratio</div>
-                        </div>
-                        <div class="button-add-criterium-data">
-                            <div class="button-add-criterium-info-small-data" id = "wp_comp">No data</div>
-                            <div class="button-add-criterium-info-small-data" id = "fp_comp">No data</div>
-                            <div class="button-add-criterium-info-small-data" id = "sum44_comp">No data</div>
-                            <div class="button-add-criterium-info-small-data" id = "rat_comp">No data</div>
+                        <div class="button-add-criterium" id = "use_criterium_comparison">
+                            <div class="button-add-criterium-info-name">Comparison</div>
+                            <div class="button-add-criterium-info">
+                                <div class="button-add-criterium-info-small" >Water peak (mbar)</div>
+                                <div class="button-add-criterium-info-small">Sum all (mbar)</div>
+                                <div class="button-add-criterium-info-small">Sum > 44 (mbar)</div>
+                                <div class="button-add-criterium-info-small">Ratio</div>
+                            </div>
+
+                            <div class="button-add-criterium-data">
+                                <div class="button-add-criterium-info-small-data" id = "wp_comp">No data</div>
+                                <div class="button-add-criterium-info-small-data" id = "fp_comp">No data</div>
+                                <div class="button-add-criterium-info-small-data" id = "sum44_comp">No data</div>
+                                <div class="button-add-criterium-info-small-data" id = "rat_comp">No data</div>
+                            </div>
+
                         </div>
                     </div>
-                </div>
-            </div>  
+                </div>  
+            </div>
+
         </div>
     </div>
 
@@ -1953,6 +2016,66 @@
     let data1 = [];
     let data3 = [];
     let filestatus = []
+
+    const mks_peaks = {
+        "Hydrogen": [[2, 100], [1, 5]],
+        "Helium": [[4, 100]],
+        "Methane": [[16, 100], [15, 85], [14, 16], [13, 8], [1, 4]],
+        "Ammonia": [[17, 100], [16, 80], [15, 8], [14, 2]],
+        "Water": [[18, 100], [17, 25], [1, 6], [16, 2], [2, 2]],
+        "Neon": [[20, 100], [22, 9]],
+        "Acetylene": [[26, 100], [25, 20], [13, 5], [54, 5], [27, 3]],
+        "Diborane": [[26, 100], [27, 96], [24, 95], [25, 57], [11, 40]],
+        "VinylChloride": [[27, 100], [62, 88], [28, 36], [26, 33], [64, 27]],
+        "Nitrogen": [[28, 100], [14, 7], [29, 1]],
+        "CarbonMonoxide": [[28, 100], [16, 10], [12, 5], [29, 1]],
+        "Ethylene": [[28, 100], [26, 61], [27, 59], [25, 12], [14, 8]],
+        "Ethane": [[28, 100], [27, 33], [30, 26], [26, 23], [29, 21]],
+        "Air": [[28, 100], [32, 27], [14, 6], [16, 3], [40, 1]],
+        "Propane": [[29, 100], [28, 59], [27, 38], [44, 26], [43, 22]],
+        "Acetaldehyde": [[29, 100], [44, 45], [43, 27], [42, 9], [26, 9]],
+        "FormicAcid": [[29, 100], [46, 61], [45, 47], [17, 17], [28, 17]],
+        "NitricAcid": [[30, 100], [14, 7], [15, 2], [16, 1]],
+        "Silane": [[30, 100], [31, 80], [29, 31], [28, 28], [32, 8]],
+        "NitrogenDioxide": [[30, 100], [46, 37], [16, 22], [14, 9]],
+        "Methanol": [[31, 100], [32, 66], [29, 64], [28, 6], [18, 2]],
+        "EthyleneGlycol": [[31, 100], [33, 28], [15, 18], [29, 17], [43, 7]],
+        "Ethanol": [[31, 100], [45, 34], [27, 24], [29, 23], [46, 17]],
+        "Oxygen": [[32, 100], [16, 11]],
+        "HydrogenSulfide": [[34, 100], [32, 44], [33, 42], [36, 34], [35, 2]],
+        "Argon": [[40, 100], [20, 10]],
+        "Propene": [[41, 100], [39, 73], [42, 69], [27, 38], [40, 29]],
+        "Acetone": [[43, 100], [15, 67], [28, 17], [14, 15], [58, 15]],
+        "Butane": [[43, 100], [29, 44], [27, 37], [28, 32], [41, 27]],
+        "MethylEthylKetone": [[43, 100], [29, 25], [72, 16], [27, 16], [57, 6]],
+        "MPOil": [[43, 100], [41, 91], [57, 73], [55, 64], [71, 20]],
+        "Acetic Acid": [[43, 100], [45, 93], [60, 57], [29, 15], [42, 1]],
+        "TurbopumpOil": [[43, 100], [57, 88], [41, 76], [55, 73], [71, 52]],
+        "CarbonDioxide": [[44, 100], [28, 11], [16, 9], [12, 6], [45, 1]],
+        "NitrousOxide": [[44, 100], [30, 31], [14, 13], [28, 11], [16, 5]],
+        "IsopropylAlcohol": [[45, 100], [43, 16], [27, 16], [29, 10], [41, 7]],
+        "BoronTrifluoride": [[49, 100], [48, 28], [68, 5], [11, 5], [19, 3]],
+        "DPOilPPE": [[50, 100], [77, 89], [63, 29], [62, 27], [64, 21]],
+        "NitrogenTrifluoride": [[52, 100], [33, 40], [71, 31], [14, 9], [19, 8]],
+        "Disilane": [[60, 100], [58, 82], [57, 48], [62, 42], [61, 40]],
+        "Diphosphine": [[62, 100], [64, 70], [63, 59], [65, 26], [66, 2]],
+        "SulfurDioxide": [[64, 100], [48, 49], [32, 10], [66, 5], [16, 5]],
+        "Fomblin": [[69, 100], [20, 28], [16, 16], [31, 9], [97, 8]],
+        "Trifluoromethane": [[69, 100], [51, 91], [31, 49], [50, 42], [12, 4]],
+        "Tetrafluoromethane": [[69, 100], [50, 12], [19, 7], [31, 5]],
+        "Freon13": [[69, 100], [85, 15], [50, 14], [31, 9], [35, 7]],
+        "CarbonDisulfide": [[76, 100], [32, 21], [44, 17], [78, 9], [38, 6]],
+        "Arsine": [[76, 100], [78, 60], [77, 21], [75, 4]],
+        "Benzene": [[78, 100], [77, 22], [51, 18], [50, 17], [52, 15]],
+        "DPOilDC705": [[78, 100], [76, 83], [39, 73], [43, 59], [91, 32]],
+        "Krypton": [[84, 100], [86, 31], [83, 20], [82, 20], [80, 4]],
+        "Freon12": [[85, 100], [87, 32], [50, 16], [35, 12]],
+        "SiliconTetrafluoride": [[85, 100], [87, 12], [28, 12], [33, 10], [86, 5]],
+        "Toluene": [[91, 100], [92, 69], [65, 16], [51, 10], [63, 9]],
+        "Trichloroethylene": [[95, 100], [60, 65], [97, 64], [35, 40], [47, 26]],
+        "Freon11": [[101, 100], [103, 60], [35, 16], [66, 15], [47, 12]],
+        "Xenon": [[132, 100], [129, 98], [131, 79], [134, 39], [136, 33]]
+    };
     
     function showTab(tabNumber) {
         document.querySelectorAll('.tab-content').forEach(tab => tab.style.display = 'none');
@@ -2508,6 +2631,7 @@
             const yMaxInput = document.getElementById('yMax');
             const yMinValue = parseFloat(yMinInput.value);
             const yMaxValue = parseFloat(yMaxInput.value);
+            const inputField = document.getElementById("Peak Number");
 
             myChart = new Chart(ctx, {
                 data: {
@@ -2620,6 +2744,15 @@
 
                             //addAnnotation(label, values, index);
                             //updateChart();
+                        }
+                    },
+                    onClick: function(event, elements) {
+                        if (elements.length > 0) {
+                            const element = elements[0];
+                            const index = element.index; // Номер колонки (индекс)
+                            inputField.value = index;
+                            inputField.dispatchEvent(new Event('input'));
+
                         }
                     },
                     scales: {
@@ -3747,6 +3880,42 @@
             
         });
     });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const inputField = document.getElementById("Peak Number");
+        const resultsContainer = document.querySelector(".peaks_info");
+        
+        inputField.addEventListener("input", function() {
+            const massPeak = parseInt(this.value, 10);
+            resultsContainer.innerHTML = "";
+            
+            if (!isNaN(massPeak)) {
+                for (const [substance, peaks] of Object.entries(mks_peaks)) {
+                    const matchingPeaks = peaks.some(([mass, _]) => mass === massPeak);
+                    
+                    if (matchingPeaks) {
+                        const substanceContainer = document.createElement("div");
+                        substanceContainer.classList.add("substance-container");
+                        substanceContainer.style.marginBottom = "10px";
+                        substanceContainer.style.marginLeft = "0px";
+                        substanceContainer.style.padding = "5px";
+                        substanceContainer.style.border = "1px solid #ccc";
+                        
+                        const title = document.createElement("strong");
+                        title.textContent = substance + ": ";
+                        
+                        const peakInfo = document.createElement("span");
+                        peakInfo.textContent = peaks.map(([mass, percent]) => `${mass} - ${percent}%`).join(", ");
+                        
+                        substanceContainer.appendChild(title);
+                        substanceContainer.appendChild(peakInfo);
+                        resultsContainer.appendChild(substanceContainer);
+                    }
+                }
+            }
+        });
+    });
+
 
     function saveAsPDF() {
         // Получаем содержимое элементов, которые нужно сохранить как PDF
