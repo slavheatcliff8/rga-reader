@@ -7,6 +7,10 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@1.1.0"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="mqttws31.min.js"></script>
+    
+
+
 
     <style>
         body {
@@ -1055,6 +1059,19 @@
             margin-left: 10px;
         }
 
+        .mqtt-connection {
+            cursor: pointer;
+                padding: 5px;
+                margin-right: 5px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: #f1f1f1;
+                font-family: Helvetica, Helvetica;
+                font-size: 12px;
+                height: 30px;
+                width: 150px;
+        }
+
         .choise-of-the-quelle {
             cursor: pointer;
                 padding: 5px;
@@ -1112,9 +1129,6 @@
             margin: 0px; /* Отступ между заголовком и кнопками */
             color: #333; /* Цвет заголовка */
         }
-
-
-        /* Адаптивные стили */
     </style>
 </head>
 <body>
@@ -1154,10 +1168,8 @@
         </div>
         <div class="table-container">
             <table id="summaryTable1" class="summary-table">
-                <!-- Содержимое таблицы summaryTable1 -->
             </table>
             <table id="dataTable1">
-                <!-- Содержимое таблицы dataTable1 -->
             </table>
         </div>
     </div>
@@ -1183,10 +1195,8 @@
         </div>
         <div class="table-container">
             <table id="summaryTable2" class="summary-table">
-                <!-- Содержимое таблицы summaryTable2 -->
             </table>
             <table id="dataTable2">
-                <!-- Содержимое таблицы dataTable2 -->
             </table>
         </div>
     </div>
@@ -1200,6 +1210,7 @@
         <div class="controls">
             <label><b>Quelle:</b></label> 
             <button class="choise-of-the-quelle" data-tab="3" data-tab-number = "3" value = "Karabo">Karabo</button>
+            <button class="mqtt-connection" data-tab="3" >MQTT</button>
 
             <label><b>Used measurements</b> From:              
                 <input type="number" id="startInterval3" value="1" min="1">
@@ -1229,6 +1240,7 @@
         <div class="controls">
             <label><b>Quelle:</b></label> 
             <button class="choise-of-the-quelle" data-tab="4" data-tab-number = "4" value = "Karabo">Karabo</button>
+            <button class="mqtt-connection" data-tab="4" data-tab-number = "4">MQTT</button>
 
             <label><b>Used measurements</b> From:              
                 <input type="number" id="startInterval4" value="1" min="1">
@@ -1355,7 +1367,7 @@
                         <button class="button-add-grey"><label for="xMin">X Min:</label>
                         <input type="number" id="xMin" step="1" value="1"></button>
                     </div>
-                    <!-- Вторая группа кнопок -->
+                
                     <div class="button-group">
                         <button class="button-add-grey"><label for="yMax">Y Max:</label>
                         <input type="number" id="yMax" step="0.1" value="1e-6"></button>
@@ -1380,7 +1392,6 @@
             </div>
         </div>
         <div class="button-container">
-            <!-- Для каждой кнопки элемента создаем отдельный контейнер с цветовым пикером под ней -->
             <div class="element-wrapper">
                 <button id="addCalculatedHistogramsButton_Water" class="square-button-active" element="Water">H<sub>2</sub>O</button>
                 <input type="color" id="colorPicker_Water" value="#00BFFF">
@@ -1734,7 +1745,6 @@
     <div id="tab7" class="tab-content">
         <h3>Result sheet</h3>
         <div class="controls">
-            <!-- Здесь могут быть элементы управления -->
             <button onclick="saveAsPDF()" class="button-add-grey"><b>Save as pdf / Print</b></button>
         </div>
         <div class="pdf-table-container"  >
@@ -1891,7 +1901,6 @@
                     <div class="pdf-text-name" contenteditable="false"></div>
                     <div class="pdf-plot" contenteditable="false">
                         <div id="resultChartContainer_reference" style="width: 100%;">
-                            <!-- Сюда будет вставляться захваченное изображение -->
                         </div>
                     </div>
 
@@ -1928,7 +1937,7 @@
                         <div class="pdf-2-name-pressure" contenteditable="true" id="final_pressure_sample"></div>
                     </div>
                 </div>
-                <!-- Здесь можно добавить содержимое для второго контейнера -->
+        
             </div>
             <div class="pdf-container" id = "end-file-3">
                 <div class="pdf-header">
@@ -2021,7 +2030,7 @@
                 <div class="pdf-info"></div>
                 <div class="pdf-info"></div>
                 <div class="pdf-info"></div>
-                <!-- Здесь можно добавить содержимое для третьего контейнера -->
+        
             </div>
         </div>
     </div>
@@ -2100,71 +2109,85 @@
         document.getElementById('tab' + tabNumber).style.display = 'block';
         document.querySelector('.tab-button:nth-of-type(' + tabNumber + ')').classList.add('active');
         
-        // Обновляем таблицу, если файл загружен
         const type_file = document.querySelector('.choise-of-the-quelle' + '[data-tab-number="' +tabNumber + '"]');
         if (document.getElementById('fileInput' + tabNumber).files[0]) {
             if (type_file.getAttribute('value') === "Karabo") {
-                    processFile2(document.getElementById('fileInput' + tabNumber).files[0], 'dataTable' + tabNumber, 'summaryTable' + tabNumber, tabNumber);
-                } else {
-                    processFile1(document.getElementById('fileInput' + tabNumber).files[0], 'dataTable' + tabNumber, 'summaryTable' + tabNumber, tabNumber);
-                }
+                processFile2(document.getElementById('fileInput' + tabNumber).files[0], 'dataTable' + tabNumber, 'summaryTable' + tabNumber, tabNumber);
+            } else if (type_file.getAttribute('value') === "Software") {
+
+                processFile1(document.getElementById('fileInput' + tabNumber).files[0], 'dataTable' + tabNumber, 'summaryTable' + tabNumber, tabNumber);
+            } else if (type_file.getAttribute('value') === "MQTT") {
+
+                processMqttData(tabNumber);
+            }
         }
     }
     document.querySelectorAll('input[type="file"]').forEach(input => {
         input.addEventListener('change', function(event) {
-            const tabNumber = event.target.getAttribute('data-tab-number'); // Получаем номер вкладки из data-атрибута
+            const tabNumber = event.target.getAttribute('data-tab-number'); 
             const file = event.target.files[0];
             if (file) {
                 filestatus.push("changed" + tabNumber);
                 const type_file = document.querySelector('.choise-of-the-quelle' + '[data-tab-number="' +tabNumber + '"]');
                 console.log(type_file.getAttribute('value'))
-                // Вызов функции обработки файла
+
                 if (type_file.getAttribute('value') === "Karabo") {
-                    processFile2(file, 'dataTable' + tabNumber, 'summaryTable' + tabNumber, tabNumber, filestatus);
-                } else {
-                    processFile1(file, 'dataTable' + tabNumber, 'summaryTable' + tabNumber, tabNumber, filestatus);
+                    processFile2(document.getElementById('fileInput' + tabNumber).files[0], 'dataTable' + tabNumber, 'summaryTable' + tabNumber, tabNumber);
+                } else if (type_file.getAttribute('value') === "Software") {
+
+                    processFile1(document.getElementById('fileInput' + tabNumber).files[0], 'dataTable' + tabNumber, 'summaryTable' + tabNumber, tabNumber);
+                } else if (type_file.getAttribute('value') === "MQTT") {
+
+                    processMqttData(tabNumber);
                 }
             }
         });
     });
+
     function initializeButtons() {
-    // Get all buttons with the class 'choise-of-the-quelle'
+        // Получаем все кнопки с классом 'choise-of-the-quelle'
         const buttons = document.querySelectorAll('.choise-of-the-quelle');
 
         buttons.forEach((button) => {
-            let isKarabo = false; // Variable to track the current state of the button
+            let currentState = 'Software'; // Переменная для отслеживания состояния кнопки
 
             button.addEventListener('click', (event) => {
-                // Get the tab number from the button's data attribute
+                // Получаем номер вкладки из атрибута кнопки
                 const tabNumber = button.getAttribute('data-tab-number');
 
-                // Select the file input corresponding to the tab number
+                // Выбираем соответствующий input для файла
                 const inputFile = document.querySelector(`input[type="file"][data-tab-number="${tabNumber}"]`);
-                const file = inputFile ? inputFile.files[0] : null; // Get the file if available
+                const file = inputFile ? inputFile.files[0] : null; // Получаем файл, если он есть
 
-                // Toggle the button text and process the file based on the state
-                if (isKarabo) {
-                    button.value = 'Software'; // Set button text to 'Software'
-                    button.textContent = 'Software'; // Set button text to 'Karabo'
+                // Логика в зависимости от состояния кнопки
+                if (currentState === 'Karabo') {
+                    button.value = 'Software';
+                    button.textContent = 'Software';
                     if (file) {
                         processFile1(file, `dataTable${tabNumber}`, `summaryTable${tabNumber}`, tabNumber, filestatus);
                     }
-                } else {
-                    button.value = 'Karabo'; // Set button text to 'Karabo'
-                    button.textContent = 'Karabo'; // Set button text to 'Karabo'
+                    currentState = 'Software'; // Переключаем состояние
+                } else if (currentState === 'Software') {
+                    button.value = 'MQTT';
+                    button.textContent = 'MQTT';
+                    // Здесь добавим логику для работы с MQTT
+                    processMqttData(tabNumber)
+                    currentState = 'MQTT'; // Переключаем состояние
+
+                } else if (currentState === 'MQTT') {
+                    button.value = 'Karabo';
+                    button.textContent = 'Karabo';
                     if (file) {
                         processFile2(file, `dataTable${tabNumber}`, `summaryTable${tabNumber}`, tabNumber, filestatus);
                     }
+                    currentState = 'Karabo'; // Переключаем состояние
                 }
-
-                // Toggle the state for the next click
-                isKarabo = !isKarabo;
             });
         });
     }
 
-// Call the initialization function after the DOM is fully loaded
     document.addEventListener('DOMContentLoaded', initializeButtons);
+
     function processFile2(file, dataTableId, summaryTableId, tabNumber, filestatus) {
         if (!file) {
             alert('Choose the file');
@@ -2179,61 +2202,57 @@
             dataTable.innerHTML = '';
             summaryTable.innerHTML = '';
 
-            const numLabels = 100; // Установлено постоянное значение 100
+            const numLabels = 100; 
 
-            // Заголовок таблицы данных
-            const dataHeaderRow = document.createElement('tr');
+      
+            const dataHeaderRow = document.createElement('tr'); 
             const dataFirstCell = document.createElement('th');
-            dataFirstCell.textContent = 'Индекс';
+            dataFirstCell.textContent = 'Index';
             dataHeaderRow.appendChild(dataFirstCell);
             for (let i = 1; i <= numLabels; i++) {
                 const th = document.createElement('th');
-                th.textContent = i; // Номера измерений в обычном формате
+                th.textContent = i; 
                 dataHeaderRow.appendChild(th);
             }
             dataTable.appendChild(dataHeaderRow);
 
-            // Заголовок таблицы резюме
             const summaryHeaderRow = document.createElement('tr');
             summaryHeaderRow.innerHTML = '<th>Sum</th><th>Sum>44</th><th>Ratio</th>';
             summaryTable.appendChild(summaryHeaderRow);
             const data = [];
             let previousRow = Array(numLabels + 1).fill(0);
 
-            // Обработка строк из файла
             lines.forEach((line, index) => {
-                // Пропускаем строки с заголовками
                 if (index === 0) return; 
-                const values = line.trim().split(/,/); // Разделение по запятой
-                if (values.length < 2) return; // Пропускаем строки с недостаточным количеством значений
+                const values = line.trim().split(/,/);
+                if (values.length < 2) return;
 
-                const row = [index]; // Записываем индекс строки
-
+                const row = [index]; 
                 for (let i = 2; i < values.length; i++) {
-                    let cellValue = values[i].trim(); // Удаляем пробелы
+                    let cellValue = values[i].trim(); 
                     let value;
 
                     if (cellValue === 'Skipped') {
-                        value = previousRow[i] || 0; // Если пропущено, используем предыдущее значеcние
+                        value = previousRow[i] || 0; 
                     } else {
                         value = parseFloat(cellValue.replace(',', '.'));
-                        value = isNaN(value) ? 0 : value; // Обработка на случай NaN
+                        value = isNaN(value) ? 0 : value; 
                     }
                     row.push(value);
                 }
 
-                previousRow = row.slice(); // Копируем текущую строку
+                previousRow = row.slice(); 
                 data.push(row);
             });
 
-            // Сохраняем данные для дальнейшего использования
+         
             if (tabNumber === 1) {
                 data1 = data;
             } else if (tabNumber === 3) {
                 data3 = data;
             }
 
-            // Заменяем отрицательные значения на ноль для определенных вкладок
+           
             if (tabNumber === 2 || tabNumber === 4) {
                 data.forEach(row => {
                     for (let i = 1; i < row.length; i++) {
@@ -2252,6 +2271,85 @@
         reader.readAsText(file);
     }
 
+    function processMqttData(tabNumber) {
+        const clientID = "mqtt_js_" + parseInt(Math.random() * 100000, 10);
+        const mqttClient = new Paho.MQTT.Client("exflqr51053", 9001, "clientId-" + Math.random());
+
+        mqttClient.onConnect = function() {
+            console.log('Connected to MQTT broker');
+            mqttClient.subscribe("test/rga", {qos: 0}); // Example topic
+        };
+
+        mqttClient.onMessageArrived = function(message) {
+
+            let data;
+            try {
+                // Выполняем как JS-выражение (небезопасно в публичных системах, но годится в тестах)
+                data = eval(message.payloadString);
+            } catch (err) {
+                console.error('❌ Failed to evaluate message:', err);
+                return;
+            }
+
+            if (Array.isArray(data)) {
+                processFile_mqtt(data, 'dataTable' + tabNumber, 'summaryTable' + tabNumber, tabNumber);
+            } else {
+                console.error('❌ Received MQTT message is not a valid array:', data);
+            }
+        };
+
+        mqttClient.connect({onSuccess: mqttClient.onConnect});
+    }
+
+
+    function processFile_mqtt(dataArray, dataTableId, summaryTableId, tabNumber) {
+        const dataTable = document.getElementById(dataTableId);
+        const summaryTable = document.getElementById(summaryTableId);
+        dataTable.innerHTML = '';
+        summaryTable.innerHTML = '';
+
+        const numColumns = dataArray.length;
+        console.log (dataArray)
+        // Заголовок таблицы данных
+        const headerRow = document.createElement('tr');
+        const indexHeader = document.createElement('th');
+        indexHeader.textContent = '№';
+        headerRow.appendChild(indexHeader);
+
+        for (let i = 1; i <= numColumns; i++) {
+            const th = document.createElement('th');
+            th.textContent = i;
+            headerRow.appendChild(th);
+        }
+        dataTable.appendChild(headerRow);
+
+        // Заголовок таблицы сводки
+        const summaryHeader = document.createElement('tr');
+        summaryHeader.innerHTML = '<th>Sum</th><th>Sum > 44</th><th>Ratio</th>';
+        summaryTable.appendChild(summaryHeader);
+
+        // Заполнение одной строки данных
+        const rowElement = document.createElement('tr');
+        const indexCell = document.createElement('td');
+        indexCell.textContent = '1';
+        rowElement.appendChild(indexCell);
+
+        dataArray.forEach((value) => {
+            const td = document.createElement('td');
+            td.textContent = parseFloat(value.toFixed(4));
+            rowElement.appendChild(td);
+        });
+
+        dataTable.appendChild(rowElement);
+
+        // Создаём структуру данных как двумерный массив (как в processFile1)
+        const structuredData = [[1, ...dataArray]];
+        console.log (structuredData)
+        // Обновление таблиц
+        displayData(dataTableId, structuredData, tabNumber, null);
+        updateSummaryTable(summaryTableId, structuredData, tabNumber);
+        updateAverages(dataTableId, structuredData, tabNumber);
+    }
     function processFile1(file, dataTableId, summaryTableId, tabNumber, filestatus) {
         if (!file) {
             alert('Choose the file');
@@ -2266,9 +2364,9 @@
             dataTable.innerHTML = '';
             summaryTable.innerHTML = '';
 
-            const numLabels = 100; // Установлено постоянное значение 100
+            const numLabels = 100; 
 
-            // Заголовок таблицы данных
+         
             const dataHeaderRow = document.createElement('tr');
             const dataFirstCell = document.createElement('th');
             dataFirstCell.textContent = '№';
@@ -2276,12 +2374,11 @@
 
             for (let i = 1; i <= numLabels; i++) {
                 const th = document.createElement('th');
-                th.textContent = i; // Номера измерений в обычном формате
+                th.textContent = i; 
                 dataHeaderRow.appendChild(th);
             }
             dataTable.appendChild(dataHeaderRow);
 
-            // Заголовок таблицы резюме
             const summaryHeaderRow = document.createElement('tr');
             summaryHeaderRow.innerHTML = '<th>Sum</th><th>Sum>44</th><th>Ratio</th>';
             summaryTable.appendChild(summaryHeaderRow);
@@ -2289,10 +2386,10 @@
             const data = [];
             let previousRow = Array(numLabels + 1).fill(0);
 
-            // Обработка строк из файла
+    
             lines.forEach((line) => {
                 const values = line.trim().split(/\s+/);
-                if (values.length <= numLabels) return; // Пропускаем строки с недостаточным количеством значений
+                if (values.length <= numLabels) return; 
                 const measurementNumber = parseInt(values[0], 10);
                 const row = [measurementNumber];
 
@@ -2303,23 +2400,22 @@
                         value = previousRow[i];
                     } else {
                         value = parseFloat(cellValue.replace(',', '.'));
-                        value = isNaN(value) ? 0 : value; // Обработка на случай NaN
+                        value = isNaN(value) ? 0 : value; 
                     }
                     row.push(value);
                 }
 
-                previousRow = row.slice(); // Копируем текущую строку
+                previousRow = row.slice(); 
                 data.push(row);
             });
 
-            // Сохраняем данные для дальнейшего использования
+
             if (tabNumber === 1) {
                 data1 = data;
             } else if (tabNumber === 3) {
                 data3 = data;
             }
 
-            // Заменяем отрицательные значения на ноль для определенных вкладок
             if (tabNumber === 2 || tabNumber === 4) {
                 data.forEach(row => {
                     for (let i = 1; i < row.length; i++) {
@@ -2343,7 +2439,7 @@
         let startInterval = 0;
         let endInterval = 100;
         if (!Array.isArray(filestatus)) {
-            filestatus = []; // Инициализируем как пустой массив, если не определён
+            filestatus = []; 
         }
         if (filestatus.includes("changed" + tabNumber))  {
             startInterval = data[0][0];
@@ -2352,14 +2448,12 @@
             endInterval = data[data.length - 1][0]; 
             document.getElementById('endInterval' + tabNumber).value = endInterval; 
 
-            // Убираем "changed" + tabNumber из filestatus
+
             filestatus = filestatus.filter(item => item !== "changed" + tabNumber);
             
-            // Если filestatus пустой, присваиваем ему пустой массив
-            
+
         }
         else {
-            // Если файл не был изменён, берём значения из input
             startInterval = parseInt(document.getElementById('startInterval' + tabNumber).value, 10);
             endInterval = parseInt(document.getElementById('endInterval' + tabNumber).value, 10);
         }
@@ -2367,9 +2461,9 @@
         const table = document.getElementById(tableId);
         table.innerHTML = '';
 
-        const numLabels = 100; // Установлено постоянное значение 100
+        const numLabels = 100; 
 
-        // Заголовок таблицы данных
+    
         const headerRow = document.createElement('tr');
         const firstCell = document.createElement('th');
         firstCell.textContent = '№';
@@ -2377,26 +2471,24 @@
 
         for (let i = 1; i <= numLabels; i++) {
             const th = document.createElement('th');
-            th.textContent = i; // Номера измерений в обычном формате
+            th.textContent = i;
             headerRow.appendChild(th);
         }
         table.appendChild(headerRow);
 
-        // Фильтрация и отображение данных
         data.forEach(row => {
             const measurementNumber = row[0];
             if (measurementNumber >= startInterval && measurementNumber <= endInterval) {
                 const tr = document.createElement('tr');
                 row.forEach((cell, index) => {
                     const td = document.createElement('td');
-                    td.textContent = index === 0 ? cell : cell.toExponential(4); // Форматирование номера измерения и остальных значений
+                    td.textContent = index === 0 ? cell : cell.toExponential(4); 
                     tr.appendChild(td);
                 });
                 table.appendChild(tr);
             }
         });
 
-        // Обновляем средние значения для выбранного диапазона
         updateAverages(tableId, data, tabNumber);
     }
 
@@ -2406,7 +2498,6 @@
         const endInterval = parseInt(document.getElementById('endInterval' + tabNumber).value, 10);
 
 
-    // Фильтрация данных по промежутку
         const filteredData = data.filter(row => row[0] >= startInterval && row[0] <= endInterval);
 
         filteredData.forEach(row => {
@@ -2417,23 +2508,22 @@
             const ratio = sum > 0 ? sumGreaterThan44 / sum : 0;
 
             const sumTd = document.createElement('td');
-            sumTd.textContent = sum.toExponential(4); // Форматирование в экспоненциальном формате
+            sumTd.textContent = sum.toExponential(4);
             tr.appendChild(sumTd);
 
             const sumGreaterThan44Td = document.createElement('td');
-            sumGreaterThan44Td.textContent = sumGreaterThan44.toExponential(4); // Форматирование в экспоненциальном формате
+            sumGreaterThan44Td.textContent = sumGreaterThan44.toExponential(4); 
             tr.appendChild(sumGreaterThan44Td);
 
             const ratioTd = document.createElement('td');
-            ratioTd.textContent = ratio.toExponential(4); // Форматирование в экспоненциальном формате
+            ratioTd.textContent = ratio.toExponential(4); 
             tr.appendChild(ratioTd);
 
             summaryTable.appendChild(tr);
         });
 
-    // Добавляем новую строку со средними значениями
         const avgRow = document.createElement('tr');
-        avgRow.classList.add('gray-row'); // Добавляем класс серой строки
+        avgRow.classList.add('gray-row'); 
 
         let sumSum = 0, sumSumGreaterThan44 = 0, sumRatio = 0;
         let count = filteredData.length;
@@ -2474,25 +2564,22 @@
 
         const table = document.getElementById(tableId);
 
-        // Удаляем старые строки сравнения
         document.querySelectorAll(`#${tableId} .compare-row`).forEach(row => row.remove());
 
-        // Обработка строки с средним значением
         let avgRow = document.querySelector(`#${tableId} .average-row`);
         if (!avgRow) {
             avgRow = document.createElement('tr');
             avgRow.classList.add('average-row', 'gray-row');
             table.appendChild(avgRow);
         } else {
-            avgRow.innerHTML = ''; // Очищаем содержимое перед обновлением
+            avgRow.innerHTML = ''; 
         }
 
-        // Первая ячейка для строки с заголовком "Average"
+    
         const avgFirstCell = document.createElement('td');
         avgFirstCell.textContent = 'Average';
         avgRow.appendChild(avgFirstCell);
 
-        // Рассчитываем средние значения
         const averages = [];
         for (let i = 1; i <= numLabels; i++) {
             let sum = 0, count = 0;
@@ -2509,39 +2596,36 @@
             const avg = count > 0 ? sum / count : 0;
             averages.push(avg);
 
-            // Добавляем ячейку среднего значения
             const avgTd = document.createElement('td');
             avgTd.textContent = avg.toExponential(4);
             avgRow.appendChild(avgTd);
         }
 
-        // Значение для сравнения с 18-м элементом (индекс 17)
         const avgValue18 = averages[17];
 
-        // Создание строк для сравнения
-        const compareRow1 = createCompareRow('> 0.01 of 18', averages, avgValue18, 0.01, 1, 44); // Проверка от 1 до 44
-        const compareRow2 = createCompareRow('> 0.001 of 18', averages, avgValue18, 0.001, 45, numLabels); // Проверка от 45 до последнего элемента
-
-        // Добавляем строки в таблицу
+        
+        const compareRow1 = createCompareRow('> 0.01 of 18', averages, avgValue18, 0.01, 1, 44); 
+        const compareRow2 = createCompareRow('> 0.001 of 18', averages, avgValue18, 0.001, 45, numLabels); 
+        
         table.appendChild(compareRow1);
         table.appendChild(compareRow2);
 
-        // Обновляем подсветку ячеек
+      
         highlightCellsInRange(tableId, startInterval, endInterval);
         if (tabNumber === 4) {
             let foundRed1 = false;
             let foundRed2 = false;
 
-            // Проверка для compareRow1
+      
             compareRow1.querySelectorAll('td').forEach(td => {
-                if (td.style.backgroundColor === 'rgb(243, 105, 105)') {  // rgb(243, 105, 105) — это #f36969 в формате rgb
+                if (td.style.backgroundColor === 'rgb(243, 105, 105)') {  
                     document.getElementById('water_1').innerText = "no";
                 }
             });
 
-            // Проверка для compareRow2
+      
             compareRow2.querySelectorAll('td').forEach(td => {
-                if (td.style.backgroundColor === 'rgb(243, 105, 105)') {  // rgb(243, 105, 105) — это #f36969 в формате rgb
+                if (td.style.backgroundColor === 'rgb(243, 105, 105)') { 
                     document.getElementById('water_2').innerText = "no";
                 }
             });
@@ -2556,14 +2640,13 @@
         compareLabelCell.textContent = label;
         compareRow.appendChild(compareLabelCell);
 
-        // Сравнение ячеек только в указанном диапазоне
-        for (let i = 1; i <= averages.length; i++) { // Используем <= для включения последнего элемента
+        for (let i = 1; i <= averages.length; i++) { 
             const compareTd = document.createElement('td');
             if (i >= start && i <= end) {
-                const compareValue = averages[i - 1]; // Приводим i к индексу массива (i-1)
-                compareTd.style.backgroundColor = compareValue > multiplier * baseValue ? '#f36969' : '#9ee3a3'; // Красный или зелёный цвет
+                const compareValue = averages[i - 1]; 
+                compareTd.style.backgroundColor = compareValue > multiplier * baseValue ? '#f36969' : '#9ee3a3'; 
             } else {
-                compareTd.style.backgroundColor = '#A9A9A9'; // Серый цвет для остальных ячеек
+                compareTd.style.backgroundColor = '#A9A9A9'; 
             }
             compareRow.appendChild(compareTd);
         }
@@ -2587,11 +2670,11 @@
     }
 
     let myChart = null;
-    let datasets = {}; // Храним наборы данных для графика
+    let datasets = {}; 
     let datasetList = {};
     const datasetColors = {};
     const datasetStack = {};
-    let annotations = []; // Храним аннотации для фиксированных точек
+    let annotations = []; 
     const colors = [
         'rgba(75, 192, 192, 0.2)',
         'rgba(255, 99, 132, 0.2)',
@@ -2605,16 +2688,16 @@
     function getDataFromTable(tableId, label) {
         const table = document.getElementById(tableId);
 
-    // Извлекаем первую строку как labels
+  
         const labels = [];
         for (let i = 1; i < table.rows[0].cells.length; i++) {
             labels.push(table.rows[0].cells[i].innerText.trim());
         }
 
-    // Извлекаем вторую строку как data
+
         const data = [];
         for (let i = 1; i < table.rows[1].cells.length; i++) {
-            const cellValue = parseFloat(table.rows[1].cells[i].innerText.trim()); // Преобразуем в число
+            const cellValue = parseFloat(table.rows[1].cells[i].innerText.trim()); 
             if (!isNaN(cellValue)) {
                 data.push(cellValue);
             } else {
@@ -2659,7 +2742,7 @@
                         let color_1 = ds.backgroundColor || 'rgba(0, 0, 0, 0.1)';
                         let order = 1;
                         let op = 45;
-                        // Устанавливаем группы для стэка и оси Y
+                        
                         if (ds.staks === 'Calculated Reference measurement') {
                             yAxisID = 'y2';
                             order = 2;
@@ -2689,16 +2772,16 @@
                         }
 
                         function setOpacity(color, alpha) {
-                            // Проверяем, является ли цвет в формате rgba
+                        
                             if (color.startsWith("rgba")) {
-                                // Изменяем альфа-канал
+                                
                                 return color.replace(/rgba\((\d+), (\d+), (\d+), ([^)]+)\)/, `rgba($1, $2, $3, ${alpha})`);
                             }
-                            // Если цвет не rgba, преобразуем его в rgba и устанавливаем прозрачность
+                           
                             return convertHexToRgba(color, alpha);
                         }
                         
-                        color_1 = setOpacity(color_1, op); // Устанавливаем новую прозрачность 0.7
+                        color_1 = setOpacity(color_1, op); 
 
                         function convertHexToRgba(hex, alpha) {
                             let r = parseInt(hex.slice(1, 3), 16);
@@ -2707,22 +2790,21 @@
                             return `rgba(${r}, ${g}, ${b}, ${alpha})`;
                         }
 
-                        // Определяем тип графика для каждого набора данных
-                        const chartType = ds.type || 'bar'; // 'line' или 'bar'
+                        const chartType = ds.type || 'bar'; 
                         return {
-                            type: chartType,  // Устанавливаем тип для каждого набора данных
+                            type: chartType, 
                             label: ds.label,
                             data: ds.data,
                             backgroundColor: ds.backgroundColor || color_1,
                             borderColor: ds.borderColor || color_1,
-                            borderWidth: chartType === 'line' ? 2 : 0,  // Ширина линии
+                            borderWidth: chartType === 'line' ? 2 : 0,  
                             stack: stackGroupX,
                             order: order,
                             yAxisID: yAxisID,
-                            fill: chartType === 'line' ? false : true, // Если это линейный график, отключаем заливку
-                            spanGaps: true,  // Соединяем точки, даже если есть пропуски
-                            showLine: chartType === 'line' ? true : false,  // Линии между точками
-                            pointRadius: chartType === 'line' ? 0 : 0  // Показываем точки только для линий
+                            fill: chartType === 'line' ? false : true, 
+                            spanGaps: true,  
+                            showLine: chartType === 'line' ? true : false,  
+                            pointRadius: chartType === 'line' ? 0 : 0  
                         };
                     })
                 },
@@ -2772,26 +2854,26 @@
                             inputField.dispatchEvent(new Event('input'));
 
                             if (lastClickedIndex === index) {
-                                verticalLine = null; // Удаляем вертикальную линию
+                                verticalLine = null; 
                             } else {
-                                // Если линия уже существует, обновляем её позицию
+                              
                                 if (verticalLine) {
-                                    verticalLine.value = myChart.data.labels[index]; // Обновляем позицию линии
+                                    verticalLine.value = myChart.data.labels[index]; 
                                 } else {
-                                    // Если линии ещё нет, создаем её
+                   
                                     verticalLine = {
                                         type: 'line',
                                         mode: 'vertical',
                                         scaleID: 'x',
-                                        value: myChart.data.labels[index], // Используем метку для положения линии
-                                        borderColor: 'rgba(0, 0, 0, 1)', // Цвет линии
+                                        value: myChart.data.labels[index], 
+                                        borderColor: 'rgba(0, 0, 0, 1)', 
                                         borderWidth: 2,
-                                        borderDash: [5, 5], // Пунктирный стиль
+                                        borderDash: [5, 5],
                                     };
                                 }
                             }
 
-                            // Обновляем график, чтобы изменения вступили в силу
+                           
                             myChart.options.plugins.annotation.annotations = verticalLine ? [verticalLine] : [];
                             myChart.update();
                             lastClickedIndex = (lastClickedIndex === index) ? null : index;
@@ -2834,25 +2916,25 @@
                             ticks: {
                                 color: "black",
                                 font: {
-                                    size: 14, // Размер шрифта 14 (можно изменить на любое значение)
+                                    size: 14,
                                     weight: "bold",
 
                                 },
                                 callback: function (value) {
-                                    // Проверяем, является ли логарифм по основанию 10 целым числом
+                                    
                                     if (Number.isInteger(Math.log10(value))) {
                                         return Number(value.toString());
                                     }
-                                    return null; // Не отображаем метки для других значений
+                                    return null; 
                                 }
                             },
                             title: {
-                                display: true, // Отображение заголовка оси
-                                text: 'Pressure in mbar', // Текст заголовка
-                                color: 'black', // Цвет текста заголовка
+                                display: true, 
+                                text: 'Pressure in mbar', 
+                                color: 'black', 
                                 font: {
-                                    size: 14, // Размер шрифта заголовка
-                                    weight: 'bold' // Жирность шрифта заголовка
+                                    size: 14, 
+                                    weight: 'bold'
                                 }
                             }
                         },
@@ -2866,25 +2948,24 @@
                             ticks: {
                                 color: "black",
                                 font: {
-                                    size: 14, // Размер шрифта 14 (можно изменить на любое значение)
+                                    size: 14,
                                     weight: "bold",
 
                                 },
                                 callback: function (value) {
-                                    // Проверяем, является ли логарифм по основанию 10 целым числом
                                     if (Number.isInteger(Math.log10(value))) {
                                         return Number(value.toString());
                                     }
-                                    return null; // Не отображаем метки для других значений
+                                    return null; 
                                 }
                             },
                             title: {
-                                display: true, // Отображение заголовка оси
-                                text: 'Pressure in mbar', // Текст заголовка
-                                color: 'black', // Цвет текста заголовка
+                                display: true,
+                                text: 'Pressure in mbar', 
+                                color: 'black', 
                                 font: {
-                                    size: 14, // Размер шрифта заголовка
-                                    weight: 'bold' // Жирность шрифта заголовка
+                                    size: 14, 
+                                    weight: 'bold' 
                                 }
                             }
                         }
@@ -2893,33 +2974,29 @@
             });
             
             document.getElementById('clearHistograms').addEventListener('click', function() {
-                // Очищаем данные и обновляем график
 
-
-                // Функция для удаления класса у кнопок
                 function removeClassFromButtons(className) {
                     const buttons = document.querySelectorAll(className);
                     buttons.forEach(button => {
-                        button.classList.remove(className.substring(1)); // Убираем точку из имени класса
+                        button.classList.remove(className.substring(1)); 
                     });
                 }
 
-                // Удаляем классы из кнопок
+        
                 removeClassFromButtons('.button-add-comparison');
                 removeClassFromButtons('.button-add-data');
                 removeClassFromButtons('.button-add-reference');
 
-                // Находим все кнопки с ID, начинающимся на "addCalculatedHistogramsButton_"
                 const squareButtons = document.querySelectorAll('button[class^="square-button-"]');
                 squareButtons.forEach(button => {
                     const classes = Array.from(button.classList);
                     classes.forEach(className => {
                         if (className.startsWith('square-button-')) {
-                            button.classList.remove(className); // Удаляем класс
+                            button.classList.remove(className); 
                             button.classList.add('square-button-active')
                         }
                     });
-                    button.style.backgroundColor = ''; // Сбрасываем цвет кнопки
+                    button.style.backgroundColor = ''; 
                 });
                 datasets = [];
                 datasetList = {};
@@ -2927,15 +3004,15 @@
                     verticalLine = null;
                 }
                 const resultsContainer = document.querySelector(".peaks_info");
-                resultsContainer.innerHTML = ""; // Очистка контейнера перед добавлением новых данных
-                
+                resultsContainer.innerHTML = "";
+
                 updateChart();
             });
 
 
         }
 
-        let buttonActive = false; // Глобальный флаг для отслеживания состояния кнопки
+        let buttonActive = false; 
 
         function addArrays(arr1, arr2) {
             return arr1.map((value, index) => value + arr2[index]);
@@ -2946,25 +3023,24 @@
         }
 
         function addCalculatedHistograms(chem, selectedColor) {
-    // Определяем ключи для "вычисленных" гистограмм
+
             const greyDatasets = Object.keys(datasets).filter(label => label.startsWith('Calculated '));
             const mainDatasets = Object.keys(datasets).filter(label => label.startsWith('Reference')||label.startsWith('Sample'));
             const oldGreyPeaks1 = datasets["Calculated Reference measurement"]?.peaks|| datasets["Calculated Sample measurement"]?.peaks|| []
             
             if (((oldGreyPeaks1.length === 1)) && oldGreyPeaks1[0] === chem) {
-        // Если есть "вычисленные" гистограммы, удаляем их
+     
                 greyDatasets.forEach(label => delete datasets[label]);
-                annotations = annotations.filter(ann => !ann.value.startsWith('Calculated ')); // Удаляем аннотации для "вычисленных" данных
+                annotations = annotations.filter(ann => !ann.value.startsWith('Calculated '));
                 updateChart();
-        // Сбрасываем флаг состояния кнопки, так как данные удалены
-                return 0;  // Возвращаем 0, если удалены существующие гистограммы
+
+                return 0;  
             } else {
                 if (mainDatasets.length === 0) {
                     return 0;
                 }
-        // Если нет, добавляем "вычисленные" гистограммы
-                const greyColor = 'rgba(128, 128, 128, 0.6)';  // Цвет новой гистограммы
-                let added = false;  // Флаг для отслеживания добавления новых данных
+                const greyColor = 'rgba(128, 128, 128, 0.6)'; 
+                let added = false;  
                 let info_peaks = []
                 Object.keys(datasets).forEach((label) => {
                     if (!label.includes("Calculated") && !label.includes("Comparison") && !label.includes("line")) {
@@ -3035,8 +3111,8 @@
                             "Freon11": [[101, 100], [103, 60], [35, 16], [66, 15], [47, 12]],
                             "Xenon": [[132, 100], [129, 98], [131, 79], [134, 39], [136, 33]]
                         };
-            // Устанавливаем метки и значения для новой гистограммы
-                        const totalColumns = 100;  // Определяем общее количество столбцов
+          
+                        const totalColumns = 100; 
                         let newDataArray = new Array(totalColumns).fill(0);
                         if (mks_peaks[chem]) {
                             elementData = mks_peaks[chem];
@@ -3046,12 +3122,12 @@
                             newDataArray[index_max-1] = max_peak; 
                             button_color = selectedColor || '#00BFFF'; 
 
-            // Вставляем данные на соответствующие позиции
+           
                             elementData.slice(1).forEach(([column, percentage]) => {
                                 const colValue = max_peak || 0; 
                                 if (totalColumns > column) newDataArray[column - 1] = colValue * (percentage / 100);
                             });
-            // Сопоставляем метки
+         
                             for (let i = 1; i <= totalColumns; i++) {
                                 newLabels.push(i.toString());
                             }
@@ -3059,11 +3135,11 @@
                         }           
                         if (!datasetList[label]?.includes(chem)) {
                             if (!Array.isArray(datasetList[label])) {
-                                datasetList[label] = [];  // Создаем массив, если он не существует
+                                datasetList[label] = []; 
                             }
                             datasetList[label].push(chem);
                             buttonActive = 1;
-                            // Добавляем новый набор данных
+                
                             datasets[`Calculated ${label} ${chem}`] = {
                                 labels: newLabels,
                                 data: newDataArray,
@@ -3081,7 +3157,7 @@
                         } else {
                             const index = datasetList[label].indexOf(chem);
                             if (index !== -1) {
-                                datasetList[label].splice(index, 1);  // Удаляем элемент
+                                datasetList[label].splice(index, 1);  
                             }
                             delete datasets[`Calculated ${label} ${chem}`];
                             buttonActive = 0;
@@ -3091,37 +3167,34 @@
                 });
 
                 updateChart();
-        // Устанавливаем флаг состояния кнопки, так как данные добавлены
-                return buttonActive ;  // Возвращаем 1, если данные были добавлены, иначе 0
+                return buttonActive ; 
             }
         }
         function handleButtonClick(button) {
             
 
-            let p = 0; // Инициализируем p здесь, чтобы она была доступна позже
+            let p = 0;
             let colorPicker, element;
 
             element = button.getAttribute('element');
-            const colorPickerId = `colorPicker_${element}`; // Получаем id цветового пикера, связанного с кнопкой
-            colorPicker = document.getElementById(colorPickerId).value; // Получаем выбранный цвет
-            p = addCalculatedHistograms(element, colorPicker); // Передаем цвет в функцию добавления гистограммы
+            const colorPickerId = `colorPicker_${element}`; 
+            colorPicker = document.getElementById(colorPickerId).value; 
+            p = addCalculatedHistograms(element, colorPicker); 
 
-            // Сохраняем текущее состояние кнопки, если данные добавлены
             if (p===1) {
-                button.classList.add(`square-button-${element}`); // Добавляем уникальный класс для кнопки
-                button.style.backgroundColor = colorPicker; // Меняем цвет кнопки на выбранный
+                button.classList.add(`square-button-${element}`);
+                button.style.backgroundColor = colorPicker; 
             } else {
                 button.classList.remove(`square-button-${element}`);
-                button.style.backgroundColor = ''; // Сбрасываем цвет кнопки
+                button.style.backgroundColor = ''; 
             }
         }
 
-        // Добавляем обработчики событий для всех кнопок
-        const buttons = document.querySelectorAll('[id^="addCalculatedHistogramsButton_"]'); // Находим все кнопки
+        const buttons = document.querySelectorAll('[id^="addCalculatedHistogramsButton_"]'); 
 
         buttons.forEach(button => {
             button.addEventListener('click', function() {
-                handleButtonClick(this); // Вызываем общую функцию с текущей кнопкой
+                handleButtonClick(this); 
             });
         });
 
@@ -3129,22 +3202,20 @@
         let test = 0;
         function toggleDataFromTable(tableId, label, chartType) {
             if (datasets[label]) {
-                // Удаляем набор данных и его цвет
+   
                 delete datasets[label];
                 delete datasetColors[label];
                 test = 0;
             } else {
-                const { labels, data } = getDataFromTable(tableId, label);  // Получаем данные
-
-                // Логика для Vacuum test 1/100
+                const { labels, data } = getDataFromTable(tableId, label);              
                 if (label.includes("Vacuum Crit.")) {
-                    const data100 = new Array(data.length).fill(null);  // Создаем массив пустых данных
-                    const referenceValue = data[17];  // 18-й элемент (индекс 17)
+                    const data100 = new Array(data.length).fill(null);  
+                    const referenceValue = data[17]; 
                     for (let i = 0; i < 45; i++) {
-                        data100[i] = referenceValue / 100;  // Значения от 1 до 45
+                        data100[i] = referenceValue / 100;  
                     }
                     for (let i = 44; i < data.length; i++) {
-                        data100[i] = referenceValue / 1000;  // Значения от 45-го элемента
+                        data100[i] = referenceValue / 1000;  
                     }
                     if (label.includes("reference")) {
                         color_color = 'colorPicker_vacuum_reference';
@@ -3156,17 +3227,16 @@
                         color_color = 'colorPicker_vacuum_comparison';
                     }
                     datasets[label] = {
-                        data: data100,    // Данные для Vacuum test 1/100
+                        data: data100,   
                         label: label,
-                        borderColor: document.getElementById(color_color).value,  // Цвет линии
-                        showLine: true,    // Показывать линию для scatter
-                        fill: false,       // Отключить заполнение под кривой
+                        borderColor: document.getElementById(color_color).value, 
+                        showLine: true,   
+                        fill: false,       
                         type: 'line',
                         labels: labels,
                         backgroundColor: "white",
                     };
                 }
-                // Остальные случаи
                 else {
                     if (chartType === 'scatter') {
                         let color_plot = '';
@@ -3181,11 +3251,11 @@
                         }
 
                         datasets[label] = {
-                            data: data,         // Данные для scatter
+                            data: data,         
                             label: label,
-                            borderColor: color_plot,   // Цвет линии
-                            showLine: true,     // Показывать линию для scatter
-                            fill: false,        // Отключить заполнение под кривой
+                            borderColor: color_plot,   
+                            showLine: true,     
+                            fill: false,        
                             type: 'line',
                             labels: labels,
                             backgroundColor: "white",
@@ -3202,14 +3272,14 @@
                         if (label == "Comparison bar") {
                             color = document.getElementById('colorPicker_comparison_bar').value;
                         }
-                        datasetColors[label] = color;  // Назначаем цвет для других графиков
+                        datasetColors[label] = color; 
                     }
                 }
 
                 test = 1;
             }
 
-            updateChart();  // Обновляем график
+            updateChart();  
             return test;
         }
 
@@ -3341,7 +3411,7 @@
 
 
         function toggleButtons(activeButtonId, vacuumButtonId) {
-            // Список всех кнопок "use_criterium"
+         
             console.log("ldd:",datasets)
             datasets = Object.keys(datasets)
             .filter(key => !key.includes("Vacuum Crit."))
@@ -3356,43 +3426,43 @@
                 { id: 'use_criterium_sample', vacuumId: 'vacuum_test_sample' }
             ];
 
-            let isActive = false; // Флаг, чтобы проверить, была ли кнопка активной
+            let isActive = false;
             
-            // Перебираем все кнопки
+
             useButtons.forEach(button => {
                 const useButton = document.getElementById(button.id);
                 const vacuumButton = document.getElementById(button.vacuumId);
 
                 if (button.id === activeButtonId) {
-                    // Если это активная кнопка, проверим, была ли она уже активной
+                    
                     if (useButton.classList.contains('button-add-green')) {
-                        // Если была активной, сбрасываем состояние
+             
                         useButton.classList.remove('button-add-green');
                         useButton.classList.add('button-add-criterium');
                         vacuumButton.classList.add('button-add-grey');
                         vacuumButton.classList.remove('button-add-green');
-                        isActive = true; // Устанавливаем флаг, чтобы больше не изменять состояние
+                        isActive = true; 
                     } else {
-                        // Если кнопка не была активной, делаем ее зеленой
+        
                         useButton.classList.add('button-add-green');
                         useButton.classList.remove('button-add-criterium');
                         vacuumButton.click();
-                        // Имитация нажатия соответствующей кнопки vacuum_test
+                    
                     }
                 } else {
-                    // Если это не активная кнопка, делаем ее серой
+                
                     useButton.classList.remove('button-add-green');
                     useButton.classList.add('button-add-criterium');
-                    // Делаем кнопки vacuum_test неактивными
+            
                     vacuumButton.classList.add('button-add-grey');
                     vacuumButton.classList.remove('button-add-green');
                 }
             });
 
-            return isActive; // Возвращаем флаг, чтобы использовать его для дальнейших действий
+            return isActive; 
         }
 
-        // Обработчики событий для кнопок "use_criterium"
+  
         document.getElementById('use_criterium_comparison').addEventListener('click', function() {
             const isActive = toggleButtons('use_criterium_comparison', 'vacuum_test_comparison');
             add_criterium("comp")
@@ -3445,29 +3515,24 @@
         });
 
         document.getElementById('myChart').addEventListener('contextmenu', function(event) {
-            event.preventDefault();  // Отключаем стандартное контекстное меню браузера
-
-    // Получаем элемент, на который кликнули
+            event.preventDefault(); 
             const elements = myChart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
     
             if (elements.length) {
                 const element = elements[0];
                 const index = element.index;
                 const label = myChart.data.labels[index];
-
-        // Ищем аннотацию, соответствующую выбранной метке (label)
                 const annotationIndex = annotations.findIndex(ann => ann.value === label);
         
                 if (annotationIndex !== -1) {
-            // Удаляем аннотацию
+ 
                     annotations.splice(annotationIndex, 1);
-                    updateChart();  // Обновляем график после удаления аннотации
+                    updateChart(); 
                 }
             }
         });
 
 
-    // Обновляем размеры графика при изменении размера окна
         window.addEventListener('resize', () => {
             const canvas = document.getElementById('myChart');
             const dpr = window.devicePixelRatio || 1;
@@ -3480,7 +3545,7 @@
             }
         });
 
-        updateChart(); // Обновляем график при загрузке страницы
+        updateChart(); 
     });
 
 
@@ -3489,10 +3554,9 @@
         const table_data = document.getElementById(dataTableId);
         const lastRowIndex = table_sum.rows.length - 1;
 
-    // Проверяем, что в таблицах есть строки
-        if (lastRowIndex < 0) return; // Если таблица пуста, выходим из функции
 
-    // Клонируем последнюю строку
+        if (lastRowIndex < 0) return; 
+
         const lastRow = table_sum.rows[lastRowIndex];
         const lastRow_data = table_data.rows[lastRowIndex];
         const rowCopy = lastRow.cloneNode(true);
@@ -3500,15 +3564,15 @@
 
         const ts = parseInt(refNumber) + 4; 
 
-    // Ищем таблицы на новой вкладке
+   
         const table_sum_comp = document.getElementById('summaryTable' + ts);
         const table_data_comp = document.getElementById('dataTable' + ts);
 
-    // Очищаем таблицы перед добавлением новых данных
+
         table_sum_comp.innerHTML = '';
         table_data_comp.innerHTML = '';
 
-    // Если таблицы пустые, добавляем заголовок
+
         if (table_sum.rows.length > 0) {
         const headerRow = table_sum.rows[0].cloneNode(true);
         table_sum_comp.appendChild(headerRow);
@@ -3518,7 +3582,6 @@
             table_data_comp.appendChild(headerRow_data);
         }
 
-    // Добавляем клонированные строки в таблицы на новой вкладке
         table_sum_comp.appendChild(rowCopy);
         table_data_comp.appendChild(rowCopy_data);
     }
@@ -3529,7 +3592,7 @@
         const refRows_dat = referenceTable_dat.rows;
         const dataRows_dat = dataTable_dat.rows;
 
-    // Убедимся, что обе таблицы имеют одинаковое количество строк
+
         if (refRows_sum.length !== dataRows_sum.length && refRows_sum.length!==0 &&  dataRows_sum.length !==0) {
             console.warn("Tables have different number of rows.");
             return;
@@ -3540,11 +3603,9 @@
         }
 
         const comparisonTable_sum = document.getElementById('summaryTable7');
-        comparisonTable_sum.innerHTML = ''; // Очищаем таблицу сравнения
+        comparisonTable_sum.innerHTML = ''; 
         const comparisonTable_dat = document.getElementById('dataTable7');
-        comparisonTable_dat.innerHTML = ''; // Очищаем таблицу сравнения
-
-    // Добавляем заголовок
+        comparisonTable_dat.innerHTML = ''; 
 
 
         const summaryHeaderRow_sum = document.createElement('tr');
@@ -3563,13 +3624,12 @@
         const numLabels = 100;
         for (let i = 1; i <= numLabels; i++) {
             const th = document.createElement('th');
-            th.textContent = i; // Номера измерений в обычном формате
+            th.textContent = i; 
             summaryHeaderRow_dat.appendChild(th);
         }
     
 
-    // Вычисляем разницу
-        for (let i = 1; i < refRows_sum.length; i++) { // начинаем с 1, чтобы пропустить заголовок
+        for (let i = 1; i < refRows_sum.length; i++) { 
             const refRow = refRows_sum[i];
             const dataRow = dataRows_sum[i];
             const newRow = document.createElement('tr');
@@ -3582,7 +3642,7 @@
             
 
                 const newCell = document.createElement('td');
-                newCell.innerText = diff.toExponential(4); // Форматируем разницу
+                newCell.innerText = diff.toExponential(4); 
                 newRow.appendChild(newCell);
             }
             const ratio_cell = document.createElement('td');
@@ -3596,12 +3656,11 @@
         }
         comparisonTable_dat.appendChild(summaryHeaderRow_dat);
     
-        for (let i = 1; i < refRows_dat.length; i++) { // начинаем с 1, чтобы пропустить заголовок
+        for (let i = 1; i < refRows_dat.length; i++) {
             const refRow = refRows_dat[i];
             const dataRow = dataRows_dat[i];
             const newRow = document.createElement('tr');
 
-            // Создаем первую ячейку с текстом "Average"
             const averageCell = document.createElement('td');
             averageCell.innerText = "Average";
             newRow.appendChild(averageCell);
@@ -3611,7 +3670,7 @@
                 const dataCell = parseFloat(dataRow.cells[j].innerText) || 0;
                 const diff = dataCell - refCell;
                 const newCell = document.createElement('td');
-                newCell.innerText = diff.toExponential(4); // Форматируем разницу
+                newCell.innerText = diff.toExponential(4); 
                 newRow.appendChild(newCell);
             }
 
@@ -3635,7 +3694,7 @@
     
     }
 
-// Устанавливаем обработчик событий для кнопок "Send to comparison"
+
     document.querySelectorAll('.sendToComparison').forEach(button => {
         button.addEventListener('click', function () {
             const tabNumber = this.getAttribute('data-tab');
@@ -3778,7 +3837,7 @@
     function downloadChart_sample() {
             const canvas = document.getElementById('myChart');
             const link = document.createElement('a');
-            const dataURL = canvas.toDataURL('image/png'); // Получаем Data URL графика
+            const dataURL = canvas.toDataURL('image/png'); 
             const resultContainer_sample = document.getElementById('resultChartContainer_sample');
             const img = document.createElement('img');
             img.src = dataURL;
@@ -3790,7 +3849,7 @@
         function downloadChart_reference() {
             const canvas = document.getElementById('myChart');
             const link = document.createElement('a');
-            const dataURL = canvas.toDataURL('image/png'); // Получаем Data URL графика
+            const dataURL = canvas.toDataURL('image/png'); 
             const resultContainer_reference = document.getElementById('resultChartContainer_reference');
             const img = document.createElement('img');
             img.src = dataURL;
@@ -3802,7 +3861,7 @@
         function downloadChart_summary() {
             const canvas = document.getElementById('myChart');
             const link = document.createElement('a');
-            const dataURL = canvas.toDataURL('image/png'); // Получаем Data URL графика
+            const dataURL = canvas.toDataURL('image/png'); 
             const resultContainer_summary = document.getElementById('resultChartContainer_summary');
             const img = document.createElement('img');
             img.src = dataURL;
@@ -3820,7 +3879,7 @@
 
     document.querySelectorAll('.last100').forEach(button => {
         button.addEventListener('click', function() {
-            const tabNumber = this.getAttribute('data-tab'); // Get tab number 
+            const tabNumber = this.getAttribute('data-tab'); 
             const startIntervalInput = document.getElementById('startInterval' + tabNumber);
             const endIntervalInput = document.getElementById('endInterval' + tabNumber);
             if (this.value === "all") {
@@ -3855,7 +3914,7 @@
 
         inputField.addEventListener("input", function() {
             const massPeak = parseInt(this.value, 10);
-            resultsContainer.innerHTML = ""; // Очистка контейнера перед добавлением новых данных
+            resultsContainer.innerHTML = ""; 
             
             if (!isNaN(massPeak)) {
                 for (const [substance, peaks] of Object.entries(mks_peaks)) {
@@ -3867,7 +3926,7 @@
                         substanceContainer.id = substanceId;
                         substanceContainer.classList.add("substance-container");
 
-                        // **Стили контейнера**
+                        
                         substanceContainer.style.display = "flex";
                         substanceContainer.style.alignItems = "center";
                         substanceContainer.style.justifyContent = "space-between";
@@ -3876,16 +3935,16 @@
                         substanceContainer.style.border = "1px solid #ccc";
                         substanceContainer.style.borderRadius = "5px";
 
-                        // **Левая часть (название)**
+                    
                         const titleContainer = document.createElement("div");
-                        titleContainer.style.flex = "0 0 150px"; // Фиксированная ширина 150px;
+                        titleContainer.style.flex = "0 0 150px"; 
                         titleContainer.style.textAlign = "center";
                         titleContainer.style.fontWeight = "bold";
                         titleContainer.style.fontSize = "20px";
                         titleContainer.textContent = substance;
-                        titleContainer.style.overflow = "hidden"; // Обрезает длинные названия
-                        titleContainer.style.textOverflow = "ellipsis"; // Добавляет "..." при обрезк
-                        // **Правая часть (список)**
+                        titleContainer.style.overflow = "hidden"; 
+                        titleContainer.style.textOverflow = "ellipsis"; 
+                    
                         const listContainer = document.createElement("div");
                         listContainer.style.flex = "2";
                         listContainer.style.marginLeft = "100px";
@@ -3904,12 +3963,12 @@
 
                         listContainer.appendChild(peakList);
 
-                        // **Добавляем в контейнер**
+                        
                         substanceContainer.appendChild(titleContainer);
                         substanceContainer.appendChild(listContainer);
                         resultsContainer.appendChild(substanceContainer);
 
-                        // **Проверяем цвет графика**
+                    
                         let foundColor = false; 
                         if (datasets) {
                             for (const datasetKey in datasets) {
@@ -3926,7 +3985,7 @@
                                 substanceContainer.style.backgroundColor = "transparent";
                         }
 
-                        // **Обработчик клика на блок вещества**
+
                         substanceContainer.addEventListener('click', function() {
                             const buttonId = `addCalculatedHistogramsButton_${substance.replace(/\s+/g, '')}`;
                             const button = document.getElementById(buttonId);
@@ -3959,25 +4018,23 @@
 
 
     function saveAsPDF() {
-        // Получаем содержимое элементов, которые нужно сохранить как PDF
+    
         var elementToPrint_1 = document.getElementById('end-file-1').outerHTML;
         var elementToPrint_2 = document.getElementById('end-file-2').outerHTML;
         var elementToPrint_3 = document.getElementById('end-file-3').outerHTML;
         
-        // Объединяем содержимое всех трех элементов
+
         var combinedContent = elementToPrint_1 + elementToPrint_2 + elementToPrint_3;
-        // Создаем новое окно
+
         var printWindow = window.open('', '', 'width=800,height=600');
         
-        // Копируем все стили из основного документа
+
         var styles = '';
         Array.from(document.styleSheets).forEach(styleSheet => {
             try {
-                // Если это CSS-файл (<link>), добавляем его через <link> в новое окно
                 if (styleSheet.href) {
                     styles += `<link rel="stylesheet" href="${styleSheet.href}">`;
                 } else {
-                    // Если это встроенный стиль (<style>), копируем его содержимое
                     Array.from(styleSheet.cssRules).forEach(rule => {
                         styles += `<style>${rule.cssText}</style>`;
                     });
@@ -3988,15 +4045,13 @@
         });
 
         function updateCheckboxHTML(element) {
-        // Находим все чекбоксы в элементе
             var checkboxes = element.querySelectorAll('input[type="checkbox"]');
-            
-            // Обновляем HTML, добавляя атрибут checked, если чекбокс отмечен
+ 
             checkboxes.forEach(function(checkbox) {
                 if (checkbox.checked) {
-                    checkbox.setAttribute('checked', 'checked');  // Добавляем атрибут checked в HTML
+                    checkbox.setAttribute('checked', 'checked');
                 } else {
-                    checkbox.removeAttribute('checked'); // Убираем атрибут, если чекбокс не отмечен
+                    checkbox.removeAttribute('checked'); 
                 }
             });
         }
@@ -4018,36 +4073,34 @@
 
 
         
-        // Добавляем содержимое для печати в новое окно
+        
         printWindow.document.write('<html><head><title>Print</title>');
-        printWindow.document.write(styles);  // Вставляем стили
+        printWindow.document.write(styles);  
         printWindow.document.write('</head><body>');
         printWindow.document.write(combinedContent);
         printWindow.document.write('</body></html>');
-        
-        // Ждем, пока содержимое загрузится, затем вызываем функцию печати
+      
         printWindow.document.close();
         printWindow.focus();
         printWindow.print();
         
-        // Закрываем окно после печати (в Safari это может не сработать автоматически)
+    
     }
     document.getElementById('saveButton').addEventListener('click', function() {
-    // Создание изображения в формате PNG
+
         const link = document.createElement('a');
         link.href = myChart.toBase64Image();
-        link.download = 'my_chart.png';  // Имя файла для скачивания
+        link.download = 'my_chart.png';  
         link.click();
     });
 
-    // Инициализируем обработчики для всех вкладок
     [1, 2, 3, 4].forEach(setupControls);
 
-    // Показываем первую вкладку по умолчанию
+
     showTab(1);
 
 
-            // Привязываем событие нажатия на кнопку к функции drawChart
+         
 </script>
 
 </body>
